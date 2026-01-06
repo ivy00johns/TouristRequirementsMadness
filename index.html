@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>U.S. Tourist Visa Application - Enhanced Vetting Form DS-160-EV</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="official-header">
+            <div class="seal"></div>
+            <h1>U.S. Department of State</h1>
+            <h2>Enhanced Vetting Tourist Visa Application</h2>
+            <p class="form-number">Form DS-160-EV (Rev. 01/2026)</p>
+            <p class="subtitle">Pursuant to Executive Order 14161 & Proclamation 10949</p>
+        </header>
+
+        <div class="warning-banner">
+            <strong>NOTICE:</strong> All fields are mandatory. Incomplete applications will be automatically denied.
+            Processing fee: $40 (non-refundable). Visa bond may be required up to $15,000.
+        </div>
+
+        <div class="status-legend">
+            <h4>Requirement Status Key:</h4>
+            <div class="legend-items">
+                <span class="legend-item current"><span class="status-dot"></span> Currently in effect</span>
+                <span class="legend-item proposed"><span class="status-dot"></span> Proposed (comment period ends Feb 2026)</span>
+                <span class="legend-item likely"><span class="status-dot"></span> Likely required (inferred from policy)</span>
+            </div>
+        </div>
+
+        <!-- Phase 1: Initial Questions -->
+        <section id="phase1" class="form-section">
+            <h3>Section A: Application Scope Assessment</h3>
+            <p class="section-desc">Please provide the following information to generate your personalized application form.</p>
+
+            <div class="question-group">
+                <label>How many immediate family members do you have? (parents, siblings, spouse, children)</label>
+                <input type="number" id="familyMembers" min="0" max="50" value="4" class="number-input">
+            </div>
+
+            <div class="question-group">
+                <label>How many email addresses have you used in the past 10 years? (personal & business)</label>
+                <input type="number" id="emailCount" min="1" max="100" value="5" class="number-input">
+            </div>
+
+            <div class="question-group">
+                <label>How many phone numbers have you used in the past 5 years? (personal, business, family)</label>
+                <input type="number" id="phoneCount" min="1" max="50" value="3" class="number-input">
+            </div>
+
+            <div class="question-group">
+                <label>How many addresses have you lived at in the past 15 years?</label>
+                <input type="number" id="addressCount" min="1" max="50" value="6" class="number-input">
+            </div>
+
+            <div class="question-group">
+                <label>How many jobs have you held in the past 15 years?</label>
+                <input type="number" id="jobCount" min="0" max="100" value="8" class="number-input">
+            </div>
+
+            <div class="question-group">
+                <label>How many countries have you traveled to in the past 15 years?</label>
+                <input type="number" id="travelCount" min="0" max="200" value="12" class="number-input">
+            </div>
+
+            <div class="question-group">
+                <label>How many social media accounts do you have or have had in the past 5 years?</label>
+                <input type="number" id="socialMediaCount" min="0" max="50" value="8" class="number-input">
+            </div>
+
+            <button id="generateForm" class="btn-primary">Generate My Application Form</button>
+        </section>
+
+        <!-- Phase 2: The Monster Form -->
+        <section id="phase2" class="form-section hidden">
+            <div class="form-stats">
+                <div class="stat">
+                    <span class="stat-number" id="totalFields">0</span>
+                    <span class="stat-label">Total Fields Required</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number" id="estimatedTime">0</span>
+                    <span class="stat-label">Estimated Hours to Complete</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number" id="pagesCount">0</span>
+                    <span class="stat-label">Pages if Printed</span>
+                </div>
+            </div>
+
+            <form id="visaForm">
+                <!-- Personal Information -->
+                <fieldset class="form-fieldset">
+                    <legend>Section B: Personal Information</legend>
+                    <div class="field-grid" id="personalFields">
+                        <div class="field-group">
+                            <label>Full Legal Name (as on passport)</label>
+                            <input type="text" disabled placeholder="Required">
+                        </div>
+                        <div class="field-group">
+                            <label>All Previous Names Used</label>
+                            <input type="text" disabled placeholder="Required">
+                        </div>
+                        <div class="field-group">
+                            <label>Date of Birth</label>
+                            <input type="date" disabled>
+                        </div>
+                        <div class="field-group">
+                            <label>Place of Birth (City)</label>
+                            <input type="text" disabled placeholder="Required">
+                        </div>
+                        <div class="field-group">
+                            <label>Place of Birth (Country)</label>
+                            <input type="text" disabled placeholder="Required">
+                        </div>
+                        <div class="field-group">
+                            <label>Biological Sex</label>
+                            <select disabled>
+                                <option>Select...</option>
+                            </select>
+                        </div>
+                        <div class="field-group">
+                            <label>National ID Number</label>
+                            <input type="text" disabled placeholder="Required">
+                        </div>
+                        <div class="field-group">
+                            <label>Passport Number</label>
+                            <input type="text" disabled placeholder="Required">
+                        </div>
+                        <div class="field-group">
+                            <label>Passport Issue Date</label>
+                            <input type="date" disabled>
+                        </div>
+                        <div class="field-group">
+                            <label>Passport Expiry Date</label>
+                            <input type="date" disabled>
+                        </div>
+                        <div class="field-group">
+                            <label>Passport Issuing Authority</label>
+                            <input type="text" disabled placeholder="Required">
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- Biometric Requirements -->
+                <fieldset class="form-fieldset biometric-section">
+                    <legend><span class="status-badge proposed">PROPOSED</span> Section C: Biometric Data Collection</legend>
+                    <p class="fieldset-notice">Per proposed rule USCIS-2025-0205 (Nov 3, 2025), the following biometric data would be collected at your interview. Comment period ends Feb 9, 2026.</p>
+                    <p class="source-cite">Source: Federal Register USCIS-2025-0205</p>
+                    <div class="biometric-grid">
+                        <div class="biometric-item">
+                            <div class="biometric-icon">👁️</div>
+                            <span>Iris Scan (Both Eyes)</span>
+                            <input type="checkbox" disabled checked>
+                        </div>
+                        <div class="biometric-item">
+                            <div class="biometric-icon">🖐️</div>
+                            <span>10 Fingerprints + Palm Prints</span>
+                            <input type="checkbox" disabled checked>
+                        </div>
+                        <div class="biometric-item">
+                            <div class="biometric-icon">📸</div>
+                            <span>Facial Recognition Photo</span>
+                            <input type="checkbox" disabled checked>
+                        </div>
+                        <div class="biometric-item">
+                            <div class="biometric-icon">🎤</div>
+                            <span>Voice Print Recording</span>
+                            <input type="checkbox" disabled checked>
+                        </div>
+                        <div class="biometric-item">
+                            <div class="biometric-icon">🧬</div>
+                            <span>DNA Sample</span>
+                            <input type="checkbox" disabled checked>
+                        </div>
+                        <div class="biometric-item">
+                            <div class="biometric-icon">✍️</div>
+                            <span>Handwriting Sample</span>
+                            <input type="checkbox" disabled checked>
+                        </div>
+                        <div class="biometric-item">
+                            <div class="biometric-icon">🤳</div>
+                            <span>Live Selfie (CBP App)</span>
+                            <input type="checkbox" disabled checked>
+                        </div>
+                    </div>
+                    <p class="biometric-note">Note: DNA collection applies to applicants of ALL ages, including infants.</p>
+                </fieldset>
+
+                <!-- Social Media Section -->
+                <fieldset class="form-fieldset">
+                    <legend><span class="status-badge current">CURRENT</span> Section D: Social Media Disclosure (Past 5 Years)</legend>
+                    <p class="fieldset-notice">You must disclose ALL accounts on the following 20 platforms. For F/M/J/H-1B visas, profiles must be set to PUBLIC before your interview (effective June 18, 2025 for students; Dec 15, 2025 for workers).</p>
+                    <p class="source-cite">Source: DS-160 Form; Federal Register Dec 10, 2025</p>
+                    <div class="social-platforms">
+                        <div class="platform-grid" id="socialMediaFields">
+                            <!-- Generated dynamically -->
+                        </div>
+                    </div>
+                    <div class="field-group full-width">
+                        <label>List any additional social media platforms not listed above:</label>
+                        <textarea disabled placeholder="Required - List ALL platforms"></textarea>
+                    </div>
+                </fieldset>
+
+                <!-- Email Addresses -->
+                <fieldset class="form-fieldset">
+                    <legend><span class="status-badge proposed">PROPOSED</span> Section E: Email Address History (Past 10 Years)</legend>
+                    <p class="source-cite">Source: Proposed ESTA rule, Dec 10, 2025 Federal Register</p>
+                    <div class="field-grid" id="emailFields">
+                        <!-- Generated dynamically -->
+                    </div>
+                </fieldset>
+
+                <!-- Phone Numbers -->
+                <fieldset class="form-fieldset">
+                    <legend><span class="status-badge proposed">PROPOSED</span> Section F: Phone Number History (Past 5 Years)</legend>
+                    <p class="source-cite">Source: Proposed ESTA rule, Dec 10, 2025 Federal Register</p>
+                    <div class="field-grid" id="phoneFields">
+                        <!-- Generated dynamically -->
+                    </div>
+                </fieldset>
+
+                <!-- Family Information -->
+                <fieldset class="form-fieldset">
+                    <legend><span class="status-badge proposed">PROPOSED</span> Section G: Family Member Information</legend>
+                    <p class="fieldset-notice">Complete information required for ALL immediate family members (parents, spouse, siblings, children) regardless of whether they are traveling with you.</p>
+                    <p class="source-cite">Source: Proposed ESTA rule requires parents' names, DOB, birthplace, residence; spouse/siblings' complete info; children's names, DOB, birthplace</p>
+                    <div id="familyFields">
+                        <!-- Generated dynamically -->
+                    </div>
+                </fieldset>
+
+                <!-- Address History -->
+                <fieldset class="form-fieldset">
+                    <legend><span class="status-badge current">CURRENT</span> Section H: Address History (Past 15 Years)</legend>
+                    <p class="source-cite">Source: DS-5535 supplemental form (15 years); DS-160 requires 5 years</p>
+                    <div id="addressFields">
+                        <!-- Generated dynamically -->
+                    </div>
+                </fieldset>
+
+                <!-- Employment History -->
+                <fieldset class="form-fieldset">
+                    <legend><span class="status-badge current">CURRENT</span> Section I: Employment History (Past 15 Years)</legend>
+                    <p class="fieldset-notice">Include ALL positions: full-time, part-time, freelance, internships, and volunteer work. Requires employer names, addresses, phone numbers, supervisor names, job titles, duties, and monthly income.</p>
+                    <p class="source-cite">Source: DS-5535 supplemental form (15 years); DS-160 requires 5 years</p>
+                    <div id="employmentFields">
+                        <!-- Generated dynamically -->
+                    </div>
+                </fieldset>
+
+                <!-- Travel History -->
+                <fieldset class="form-fieldset">
+                    <legend><span class="status-badge current">CURRENT</span> Section J: International Travel History (Past 15 Years)</legend>
+                    <p class="source-cite">Source: DS-5535 supplemental form (15 years); DS-160 requires 5 years</p>
+                    <div id="travelFields">
+                        <!-- Generated dynamically -->
+                    </div>
+                </fieldset>
+
+                <!-- Additional Questions -->
+                <fieldset class="form-fieldset">
+                    <legend>Section K: Security Screening Questions</legend>
+                    <p class="source-cite">Source: Consular officers screen for "hostility toward the U.S." and antisemitism per June 2025 guidance. IP metadata collection per proposed ESTA rule.</p>
+                    <div class="security-questions">
+                        <div class="field-group full-width">
+                            <label><span class="status-badge-inline likely">LIKELY</span> Have you ever expressed views critical of the United States government on social media?</label>
+                            <select disabled><option>Select Yes/No</option></select>
+                            <p class="field-note">Inferred from screening criteria for "hostility toward the U.S."</p>
+                        </div>
+                        <div class="field-group full-width">
+                            <label><span class="status-badge-inline likely">LIKELY</span> Have you ever attended a protest or political demonstration?</label>
+                            <select disabled><option>Select Yes/No</option></select>
+                            <p class="field-note">Inferred from organizational membership screening</p>
+                        </div>
+                        <div class="field-group full-width">
+                            <label><span class="status-badge-inline current">CURRENT</span> List all organizations, clubs, or groups you have been a member of (past 15 years):</label>
+                            <textarea disabled placeholder="Required"></textarea>
+                        </div>
+                        <div class="field-group full-width">
+                            <label><span class="status-badge-inline current">CURRENT</span> Have you ever been questioned, detained, or arrested by any authority in any country?</label>
+                            <select disabled><option>Select Yes/No</option></select>
+                        </div>
+                        <div class="field-group full-width">
+                            <label><span class="status-badge-inline proposed">PROPOSED</span> Provide IP addresses you have used to access social media (if known):</label>
+                            <textarea disabled placeholder="Required if known"></textarea>
+                            <p class="field-note">Per proposed ESTA rule: "IP addresses and metadata from submitted photographs"</p>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- Submit Section -->
+                <div class="submit-section">
+                    <div class="fee-breakdown">
+                        <h4>Fee Summary</h4>
+                        <div class="fee-line">
+                            <span>ESTA Fee <span class="fee-status current">CURRENT</span></span>
+                            <span>$40.00</span>
+                        </div>
+                        <div class="fee-line">
+                            <span>I-94 Land Border Fee <span class="fee-status current">CURRENT</span></span>
+                            <span>$30.00</span>
+                        </div>
+                        <div class="fee-line">
+                            <span>Visa Bond (if required) <span class="fee-status current">CURRENT</span></span>
+                            <span>Up to $15,000.00</span>
+                        </div>
+                        <div class="fee-line total">
+                            <span>Potential Maximum</span>
+                            <span>$15,070.00</span>
+                        </div>
+                        <p class="fee-note">Sources: ESTA fee increase Sep 30, 2025; I-94 increase to $30; Visa bond pilot Aug 2025-Aug 2026</p>
+                    </div>
+
+                    <div class="disclaimer">
+                        <input type="checkbox" id="certify" disabled checked>
+                        <label for="certify">I certify under penalty of perjury that all information provided is true and complete. I understand that false statements may result in permanent visa ineligibility and criminal prosecution.</label>
+                    </div>
+
+                    <button type="button" id="submitForm" class="btn-submit">Submit Application</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Results Modal -->
+        <div id="resultsModal" class="modal hidden">
+            <div class="modal-content">
+                <h2>Your "Simple" Tourist Visa Application</h2>
+                <div class="results-stats">
+                    <div class="result-stat">
+                        <span class="big-number" id="finalFieldCount">0</span>
+                        <span>Form Fields</span>
+                    </div>
+                    <div class="result-stat">
+                        <span class="big-number" id="finalTimeEstimate">0</span>
+                        <span>Hours to Complete</span>
+                    </div>
+                    <div class="result-stat">
+                        <span class="big-number" id="finalPages">0</span>
+                        <span>Printed Pages</span>
+                    </div>
+                </div>
+                <div class="comparison">
+                    <h3>For comparison, to visit the US you need to provide:</h3>
+                    <ul id="comparisonList">
+                        <!-- Generated dynamically -->
+                    </ul>
+                </div>
+                <div class="absurdity-scale">
+                    <h3>Absurdity Level</h3>
+                    <div class="scale-bar">
+                        <div class="scale-fill" id="absurdityFill"></div>
+                    </div>
+                    <p class="scale-label" id="absurdityLabel"></p>
+                </div>
+                <div class="share-section">
+                    <p>Think this is insane? Share it.</p>
+                    <div class="share-buttons">
+                        <button class="share-btn twitter" onclick="shareTwitter()">Share on X</button>
+                        <button class="share-btn copy" onclick="copyLink()">Copy Link</button>
+                    </div>
+                </div>
+                <button class="btn-close" onclick="closeModal()">Close</button>
+                <p class="source-note">Source: Executive Order 14161, Proclamation 10949, USCIS-2025-0205</p>
+            </div>
+        </div>
+
+        <footer>
+            <p>This is a satirical demonstration of actual requirements proposed and implemented by the Trump administration in 2025-2026.</p>
+            <p>Data sourced from Federal Register notices, Executive Orders, and official State Department forms.</p>
+            <p class="footer-link"><a href="claude_docs/trump_visa_madness.md" target="_blank">View Full Requirements Documentation</a></p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
