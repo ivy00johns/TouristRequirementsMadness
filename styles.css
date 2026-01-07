@@ -1305,6 +1305,24 @@ footer p {
     background: #9b2c2c;
 }
 
+.btn-remove-account {
+    background: #c53030;
+    color: white;
+    border: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    font-size: 0.8rem;
+    cursor: pointer;
+    line-height: 1;
+    transition: background 0.2s;
+    flex-shrink: 0;
+}
+
+.btn-remove-account:hover {
+    background: #9b2c2c;
+}
+
 /* Repeater sections */
 .repeater-section {
     background: #f7fafc;

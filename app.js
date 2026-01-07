@@ -431,10 +431,14 @@ function createField(config) {
 }
 
 // Helper: Create entry container
-function createEntryContainer(className, title, subtitle, content) {
+function createEntryContainer(className, title, subtitle, content, showRemove = false) {
+    const removeBtn = showRemove ? '<button type="button" class="btn-remove-entry" onclick="removeDynamicEntry(this)">×</button>' : '';
     return `
         <div class="${className}">
-            <h4>${title}${subtitle ? ` <span class="entry-subtitle">${subtitle}</span>` : ''}</h4>
+            <h4 style="${showRemove ? 'display:flex;justify-content:space-between;align-items:center;' : ''}">
+                <span>${title}${subtitle ? ` <span class="entry-subtitle">${subtitle}</span>` : ''}</span>
+                ${removeBtn}
+            </h4>
             <div class="field-row">
                 ${content}
             </div>
@@ -692,7 +696,7 @@ function generateEmailFields(count) {
 
     for (let i = 0; i < count; i++) {
         const content = def.entryFields.map(field => createField(field)).join('');
-        container.insertAdjacentHTML('beforeend', createEntryContainer('email-entry', `Email Address ${i + 1}`, '', content));
+        container.insertAdjacentHTML('beforeend', createEntryContainer('email-entry', `Email Address ${i + 1}`, '', content, i > 0));
         totalFieldCount += def.fieldsPerEntry;
     }
 }
@@ -705,7 +709,7 @@ function generatePhoneFields(count) {
 
     for (let i = 0; i < count; i++) {
         const content = def.entryFields.map(field => createField(field)).join('');
-        container.insertAdjacentHTML('beforeend', createEntryContainer('phone-entry', `Phone Number ${i + 1}`, '', content));
+        container.insertAdjacentHTML('beforeend', createEntryContainer('phone-entry', `Phone Number ${i + 1}`, '', content, i > 0));
         totalFieldCount += def.fieldsPerEntry;
     }
 }
@@ -750,7 +754,7 @@ function generateFamilyFields(count) {
             fieldCount = 11;
         }
 
-        container.insertAdjacentHTML('beforeend', createEntryContainer('family-entry', rel, '', fieldsHtml));
+        container.insertAdjacentHTML('beforeend', createEntryContainer('family-entry', rel, '', fieldsHtml, i > 0));
         totalFieldCount += fieldCount;
     }
 }
@@ -763,7 +767,7 @@ function generateAddressFields(count) {
 
     for (let i = 0; i < count; i++) {
         const content = def.entryFields.map(field => createField(field)).join('');
-        container.insertAdjacentHTML('beforeend', createEntryContainer('address-entry', `Address ${i + 1}`, i === 0 ? '(Current)' : '', content));
+        container.insertAdjacentHTML('beforeend', createEntryContainer('address-entry', `Address ${i + 1}`, i === 0 ? '(Current)' : '', content, i > 0));
         totalFieldCount += def.fieldsPerEntry;
     }
 }
@@ -776,7 +780,7 @@ function generateEducationFields(count) {
 
     for (let i = 0; i < count; i++) {
         const content = def.entryFields.map(field => createField(field)).join('');
-        container.insertAdjacentHTML('beforeend', createEntryContainer('education-entry', `Educational Institution ${i + 1}`, i === 0 ? '(Most Recent)' : '', content));
+        container.insertAdjacentHTML('beforeend', createEntryContainer('education-entry', `Educational Institution ${i + 1}`, i === 0 ? '(Most Recent)' : '', content, i > 0));
         totalFieldCount += def.fieldsPerEntry;
     }
 }
@@ -789,7 +793,7 @@ function generateEmploymentFields(count) {
 
     for (let i = 0; i < count; i++) {
         const content = def.entryFields.map(field => createField(field)).join('');
-        container.insertAdjacentHTML('beforeend', createEntryContainer('employment-entry', `Position ${i + 1}`, i === 0 ? '(Current/Most Recent)' : '', content));
+        container.insertAdjacentHTML('beforeend', createEntryContainer('employment-entry', `Position ${i + 1}`, i === 0 ? '(Current/Most Recent)' : '', content, i > 0));
         totalFieldCount += def.fieldsPerEntry;
     }
 }
@@ -802,7 +806,7 @@ function generateTravelFields(count) {
 
     for (let i = 0; i < count; i++) {
         const content = def.entryFields.map(field => createField(field)).join('');
-        container.insertAdjacentHTML('beforeend', createEntryContainer('travel-entry', `Trip ${i + 1}`, '', content));
+        container.insertAdjacentHTML('beforeend', createEntryContainer('travel-entry', `Trip ${i + 1}`, '', content, i > 0));
         totalFieldCount += def.fieldsPerEntry;
     }
 }
@@ -821,7 +825,7 @@ function generateUSTravelFields(count) {
 
     for (let i = 0; i < count; i++) {
         const content = def.entryFields.map(field => createField(field)).join('');
-        container.insertAdjacentHTML('beforeend', createEntryContainer('us-travel-entry', `U.S. Visit ${i + 1}`, '', content));
+        container.insertAdjacentHTML('beforeend', createEntryContainer('us-travel-entry', `U.S. Visit ${i + 1}`, '', content, i > 0));
         totalFieldCount += def.fieldsPerEntry;
     }
 }
@@ -844,7 +848,7 @@ function generateUSContactsFields(contactCount, destinationCount) {
         let contactsHtml = '<div class="subsection"><h5>U.S. Contacts</h5>';
         for (let i = 0; i < contactCount; i++) {
             const content = def.contactFields.map(field => createField(field)).join('');
-            contactsHtml += createEntryContainer('contact-entry', `U.S. Contact ${i + 1}`, '', content);
+            contactsHtml += createEntryContainer('contact-entry', `U.S. Contact ${i + 1}`, '', content, i > 0);
             totalFieldCount += def.contactFieldsPerEntry;
         }
         contactsHtml += '</div>';
@@ -855,7 +859,7 @@ function generateUSContactsFields(contactCount, destinationCount) {
     let itineraryHtml = '<div class="subsection"><h5>Planned Itinerary</h5>';
     for (let i = 0; i < destinationCount; i++) {
         const content = def.itineraryFields.map(field => createField(field)).join('');
-        itineraryHtml += createEntryContainer('itinerary-entry', `Destination ${i + 1}`, '', content);
+        itineraryHtml += createEntryContainer('itinerary-entry', `Destination ${i + 1}`, '', content, i > 0);
         totalFieldCount += def.itineraryFieldsPerEntry;
     }
     itineraryHtml += '</div>';
@@ -895,7 +899,7 @@ function generateOrganizationFields(count) {
 
     for (let i = 0; i < count; i++) {
         const content = def.entryFields.map(field => createField(field)).join('');
-        container.insertAdjacentHTML('beforeend', createEntryContainer('organization-entry', `Organization ${i + 1}`, '', content));
+        container.insertAdjacentHTML('beforeend', createEntryContainer('organization-entry', `Organization ${i + 1}`, '', content, i > 0));
         totalFieldCount += def.fieldsPerEntry;
     }
 
@@ -940,6 +944,9 @@ function generateForm(skipScroll = false) {
 
     document.getElementById('phase1').classList.add('hidden');
     document.getElementById('phase2').classList.remove('hidden');
+
+    // Initialize repeater buttons after form is generated
+    initializeRepeaters();
 
     if (!skipScroll) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1100,6 +1107,215 @@ function autoFillDemo() {
 // Helper for random range
 function randomInRange(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+// Repeater functionality - Add new entries
+function initializeRepeaters() {
+    // Enable all add buttons
+    document.querySelectorAll('.btn-add-item').forEach(btn => {
+        btn.disabled = false;
+        btn.addEventListener('click', handleAddEntry);
+    });
+
+    document.querySelectorAll('.btn-add-account').forEach(btn => {
+        btn.disabled = false;
+        btn.addEventListener('click', handleAddAccount);
+    });
+}
+
+function handleAddEntry(e) {
+    const button = e.target;
+    const repeaterSection = button.closest('.repeater-section');
+    const repeaterItems = repeaterSection.querySelector('.repeater-items');
+    const entryCount = repeaterSection.querySelector('.entry-count');
+
+    // Get the first entry as a template
+    const firstEntry = repeaterItems.querySelector('[class$="-entry"]');
+    if (!firstEntry) return;
+
+    // Clone and update the entry
+    const newEntry = firstEntry.cloneNode(true);
+    const currentCount = repeaterItems.querySelectorAll('[class$="-entry"]').length + 1;
+
+    // Update the entry number in the h4
+    const h4 = newEntry.querySelector('h4');
+    if (h4) {
+        const className = firstEntry.className;
+        const entryType = className.replace('-entry', '').replace(/^\w/, c => c.toUpperCase());
+        h4.textContent = h4.textContent.replace(/\d+/, currentCount);
+    }
+
+    // Clear all input values in the clone
+    newEntry.querySelectorAll('input, textarea').forEach(input => {
+        input.value = '';
+    });
+    newEntry.querySelectorAll('select').forEach(select => {
+        select.selectedIndex = 0;
+    });
+
+    // Add remove button if not present
+    if (!newEntry.querySelector('.btn-remove-entry')) {
+        const removeBtn = document.createElement('button');
+        removeBtn.type = 'button';
+        removeBtn.className = 'btn-remove-entry';
+        removeBtn.textContent = '×';
+        removeBtn.addEventListener('click', () => removeEntry(removeBtn, repeaterSection));
+
+        const entryH4 = newEntry.querySelector('h4');
+        if (entryH4) {
+            entryH4.style.display = 'flex';
+            entryH4.style.justifyContent = 'space-between';
+            entryH4.style.alignItems = 'center';
+            const titleText = entryH4.textContent;
+            entryH4.innerHTML = `<span>${titleText}</span>`;
+            entryH4.appendChild(removeBtn);
+        }
+    }
+
+    repeaterItems.appendChild(newEntry);
+
+    // Update count
+    if (entryCount) {
+        entryCount.textContent = `(${currentCount} entries)`;
+    }
+
+    // Update total field count
+    totalFieldCount += countFieldsInEntry(newEntry);
+    updateStats();
+}
+
+function handleAddAccount(e) {
+    const button = e.target;
+    const platformSection = button.closest('.platform-section');
+    const platformAccounts = platformSection.querySelector('.platform-accounts');
+
+    const firstAccount = platformAccounts.querySelector('.platform-item');
+    if (!firstAccount) return;
+
+    const newAccount = firstAccount.cloneNode(true);
+    const currentCount = platformAccounts.querySelectorAll('.platform-item').length + 1;
+
+    // Update account label
+    const label = newAccount.querySelector('.account-label');
+    if (label) {
+        label.textContent = `Account ${currentCount}`;
+    }
+
+    // Clear inputs
+    newAccount.querySelectorAll('input').forEach(input => {
+        input.value = '';
+    });
+    newAccount.querySelectorAll('select').forEach(select => {
+        select.selectedIndex = 0;
+    });
+
+    // Add remove button if not present
+    if (!newAccount.querySelector('.btn-remove-account')) {
+        const removeBtn = document.createElement('button');
+        removeBtn.type = 'button';
+        removeBtn.className = 'btn-remove-account';
+        removeBtn.textContent = '×';
+        removeBtn.onclick = function() { removeSocialAccount(this); };
+        newAccount.appendChild(removeBtn);
+    }
+
+    platformAccounts.appendChild(newAccount);
+
+    // Update total field count (5 fields per account)
+    totalFieldCount += 5;
+    updateStats();
+}
+
+function removeEntry(button, repeaterSection) {
+    const entry = button.closest('[class$="-entry"]');
+    const repeaterItems = repeaterSection.querySelector('.repeater-items');
+    const entryCount = repeaterSection.querySelector('.entry-count');
+
+    // Don't remove if it's the last entry
+    const allEntries = repeaterItems.querySelectorAll('[class$="-entry"]');
+    if (allEntries.length <= 1) return;
+
+    // Update field count before removing
+    totalFieldCount -= countFieldsInEntry(entry);
+
+    entry.remove();
+
+    // Renumber remaining entries
+    const remainingEntries = repeaterItems.querySelectorAll('[class$="-entry"]');
+    remainingEntries.forEach((entry, index) => {
+        const h4 = entry.querySelector('h4 span') || entry.querySelector('h4');
+        if (h4) {
+            h4.textContent = h4.textContent.replace(/\d+/, index + 1);
+        }
+    });
+
+    // Update count
+    if (entryCount) {
+        entryCount.textContent = `(${remainingEntries.length} ${remainingEntries.length === 1 ? 'entry' : 'entries'})`;
+    }
+
+    updateStats();
+}
+
+function countFieldsInEntry(entry) {
+    const inputs = entry.querySelectorAll('input, select, textarea');
+    return inputs.length;
+}
+
+// Remove dynamically generated entries (emails, phones, family, addresses, etc.)
+function removeDynamicEntry(button) {
+    const entry = button.closest('[class$="-entry"]');
+    if (!entry) return;
+
+    const container = entry.parentElement;
+    const allEntries = container.querySelectorAll('[class$="-entry"]');
+
+    // Don't remove if it's the last entry
+    if (allEntries.length <= 1) return;
+
+    // Update field count before removing
+    totalFieldCount -= countFieldsInEntry(entry);
+
+    entry.remove();
+
+    // Renumber remaining entries
+    const remainingEntries = container.querySelectorAll('[class$="-entry"]');
+    remainingEntries.forEach((entry, index) => {
+        const h4Span = entry.querySelector('h4 > span:first-child') || entry.querySelector('h4');
+        if (h4Span) {
+            h4Span.innerHTML = h4Span.innerHTML.replace(/\d+/, index + 1);
+        }
+    });
+
+    updateStats();
+}
+
+// Remove social media account
+function removeSocialAccount(button) {
+    const account = button.closest('.platform-item');
+    if (!account) return;
+
+    const container = account.parentElement;
+    const allAccounts = container.querySelectorAll('.platform-item');
+
+    // Don't remove if it's the last account
+    if (allAccounts.length <= 1) return;
+
+    // Update field count (5 fields per account)
+    totalFieldCount -= 5;
+
+    account.remove();
+
+    // Renumber remaining accounts
+    const remainingAccounts = container.querySelectorAll('.platform-item');
+    remainingAccounts.forEach((acc, index) => {
+        const label = acc.querySelector('.account-label');
+        if (label) {
+            label.textContent = `Account ${index + 1}`;
+        }
+    });
+
+    updateStats();
 }
 
 // Initialize
