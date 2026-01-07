@@ -735,28 +735,72 @@ body {
 /* Social Media Platforms */
 .platform-grid {
     display: grid;
+    gap: 15px;
+}
+
+.platform-section {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 15px;
+}
+
+.platform-section.additional {
+    background: #fff5f5;
+    border-color: #feb2b2;
+}
+
+.platform-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.platform-name {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #2c5282;
+}
+
+.btn-add-account {
+    background: #38a169;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-add-account:hover {
+    background: #2f855a;
+}
+
+.platform-accounts {
+    display: flex;
+    flex-direction: column;
     gap: 10px;
 }
 
 .platform-item {
     display: grid;
-    grid-template-columns: 150px 1fr 1fr 150px;
+    grid-template-columns: 100px repeat(5, 1fr);
     gap: 10px;
     align-items: center;
     padding: 10px;
-    background: white;
-    border: 1px solid #ddd;
+    background: #f7fafc;
+    border: 1px solid #e2e8f0;
     border-radius: 4px;
 }
 
-.platform-item.additional {
-    background: #fff5f5;
-    border-color: #feb2b2;
-}
-
-.platform-name {
-    font-weight: 600;
-    font-size: 0.9rem;
+.platform-item .account-label {
+    font-weight: 500;
+    font-size: 0.85rem;
+    color: #555;
 }
 
 /* Entry Sections (Email, Phone, Family, etc.) */
@@ -1312,13 +1356,16 @@ footer p {
     padding: 20px;
 }
 
-/* Education, US Travel, Contact, Itinerary, Alias entries */
+/* Education, US Travel, Contact, Itinerary, Alias, Citizenship, Marriage, Lost Passport entries */
 .education-entry,
 .us-travel-entry,
 .contact-entry,
 .itinerary-entry,
 .organization-entry,
-.alias-entry {
+.alias-entry,
+.citizenship-entry,
+.marriage-entry,
+.lost-passport-entry {
     background: white;
     border: 1px solid #ddd;
     padding: 20px;
@@ -1331,7 +1378,10 @@ footer p {
 .contact-entry h4,
 .itinerary-entry h4,
 .organization-entry h4,
-.alias-entry h4 {
+.alias-entry h4,
+.citizenship-entry h4,
+.marriage-entry h4,
+.lost-passport-entry h4 {
     color: #2c5282;
     margin-bottom: 15px;
     padding-bottom: 10px;

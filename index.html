@@ -193,34 +193,41 @@
                                 <select disabled><option>Select Yes/No</option><option>Yes</option><option>No</option></select>
                             </div>
                         </div>
-                        <div id="aliasFields" class="repeater-items">
-                            <div class="alias-entry">
-                                <div class="field-row">
-                                    <div class="field-group">
-                                        <label>Other Surname / Family Name</label>
-                                        <input type="text" disabled placeholder="Required if applicable">
-                                    </div>
-                                    <div class="field-group">
-                                        <label>Other Given Name(s)</label>
-                                        <input type="text" disabled placeholder="Required if applicable">
-                                    </div>
-                                    <div class="field-group">
-                                        <label>Type of Name</label>
-                                        <select disabled>
-                                            <option>Select Type</option>
-                                            <option>Maiden Name</option>
-                                            <option>Previous Married Name</option>
-                                            <option>Nickname/Alias</option>
-                                            <option>Religious Name</option>
-                                            <option>Professional/Stage Name</option>
-                                            <option>Tribal Name</option>
-                                            <option>Legal Name Change</option>
-                                            <option>Other</option>
-                                        </select>
-                                    </div>
-                                    <div class="field-group">
-                                        <label>Dates Used (From - To)</label>
-                                        <input type="text" disabled placeholder="MM/YYYY - MM/YYYY">
+                        <div class="repeater-section">
+                            <div class="repeater-header">
+                                <span class="entry-count">(1 entry)</span>
+                                <button type="button" class="btn-add-item" disabled>+ Add Another Name</button>
+                            </div>
+                            <div id="aliasFields" class="repeater-items">
+                                <div class="alias-entry">
+                                    <h4>Other Name 1</h4>
+                                    <div class="field-row">
+                                        <div class="field-group">
+                                            <label>Other Surname / Family Name</label>
+                                            <input type="text" disabled placeholder="Required if applicable">
+                                        </div>
+                                        <div class="field-group">
+                                            <label>Other Given Name(s)</label>
+                                            <input type="text" disabled placeholder="Required if applicable">
+                                        </div>
+                                        <div class="field-group">
+                                            <label>Type of Name</label>
+                                            <select disabled>
+                                                <option>Select Type</option>
+                                                <option>Maiden Name</option>
+                                                <option>Previous Married Name</option>
+                                                <option>Nickname/Alias</option>
+                                                <option>Religious Name</option>
+                                                <option>Professional/Stage Name</option>
+                                                <option>Tribal Name</option>
+                                                <option>Legal Name Change</option>
+                                                <option>Other</option>
+                                            </select>
+                                        </div>
+                                        <div class="field-group">
+                                            <label>Dates Used (From - To)</label>
+                                            <input type="text" disabled placeholder="MM/YYYY - MM/YYYY">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -284,7 +291,7 @@
                                 </select>
                             </div>
                             <div class="field-group">
-                                <label>Date of Marriage (if married)</label>
+                                <label>Date of Current/Most Recent Marriage</label>
                                 <input type="date" disabled>
                             </div>
                             <div class="field-group">
@@ -295,9 +302,58 @@
                                 <label>Have you been previously married?</label>
                                 <select disabled><option>Select Yes/No</option><option>Yes</option><option>No</option></select>
                             </div>
-                            <div class="field-group">
-                                <label>Number of Previous Marriages</label>
-                                <input type="number" disabled placeholder="If applicable" min="0">
+                        </div>
+
+                        <!-- Previous Marriages Repeater -->
+                        <div class="repeater-section" style="margin-top: 15px;">
+                            <div class="repeater-header">
+                                <h4>Previous Marriages <span class="entry-count">(1 entry)</span></h4>
+                                <button type="button" class="btn-add-item" disabled>+ Add Previous Marriage</button>
+                            </div>
+                            <div class="repeater-items">
+                                <div class="marriage-entry">
+                                    <h4>Previous Marriage 1</h4>
+                                    <div class="field-row">
+                                        <div class="field-group">
+                                            <label>Former Spouse's Full Legal Name</label>
+                                            <input type="text" disabled placeholder="Required">
+                                        </div>
+                                        <div class="field-group">
+                                            <label>Former Spouse's Date of Birth</label>
+                                            <input type="date" disabled>
+                                        </div>
+                                        <div class="field-group">
+                                            <label>Former Spouse's Country of Citizenship</label>
+                                            <input type="text" disabled placeholder="Required">
+                                        </div>
+                                        <div class="field-group">
+                                            <label>Date of Marriage</label>
+                                            <input type="date" disabled>
+                                        </div>
+                                        <div class="field-group">
+                                            <label>Place of Marriage (City, Country)</label>
+                                            <input type="text" disabled placeholder="Required">
+                                        </div>
+                                        <div class="field-group">
+                                            <label>Date Marriage Ended</label>
+                                            <input type="date" disabled>
+                                        </div>
+                                        <div class="field-group">
+                                            <label>How Marriage Ended</label>
+                                            <select disabled>
+                                                <option>Select...</option>
+                                                <option>Divorce</option>
+                                                <option>Death of Spouse</option>
+                                                <option>Annulment</option>
+                                                <option>Other</option>
+                                            </select>
+                                        </div>
+                                        <div class="field-group">
+                                            <label>Country Where Marriage Ended</label>
+                                            <input type="text" disabled placeholder="Required">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -314,10 +370,55 @@
                                 <label>Do you hold or have you held any other nationality?</label>
                                 <select disabled><option>Select Yes/No</option><option>Yes</option><option>No</option></select>
                             </div>
-                            <div class="field-group">
-                                <label>Other Country/Countries of Citizenship (past or present)</label>
-                                <input type="text" disabled placeholder="List all if applicable">
+                        </div>
+
+                        <!-- Other Citizenships Repeater -->
+                        <div class="repeater-section" style="margin-top: 15px;">
+                            <div class="repeater-header">
+                                <h4>Other Nationalities/Citizenships <span class="entry-count">(1 entry)</span></h4>
+                                <button type="button" class="btn-add-item" disabled>+ Add Another Citizenship</button>
                             </div>
+                            <div class="repeater-items">
+                                <div class="citizenship-entry">
+                                    <h4>Other Citizenship 1</h4>
+                                    <div class="field-row">
+                                        <div class="field-group">
+                                            <label>Country</label>
+                                            <input type="text" disabled placeholder="Required">
+                                        </div>
+                                        <div class="field-group">
+                                            <label>How Acquired</label>
+                                            <select disabled>
+                                                <option>Select...</option>
+                                                <option>Birth</option>
+                                                <option>Naturalization</option>
+                                                <option>Marriage</option>
+                                                <option>Descent (Parent)</option>
+                                                <option>Other</option>
+                                            </select>
+                                        </div>
+                                        <div class="field-group">
+                                            <label>Date Acquired</label>
+                                            <input type="date" disabled>
+                                        </div>
+                                        <div class="field-group">
+                                            <label>Do you still hold this citizenship?</label>
+                                            <select disabled><option>Select Yes/No</option><option>Yes</option><option>No</option></select>
+                                        </div>
+                                        <div class="field-group">
+                                            <label>Date Renounced (if applicable)</label>
+                                            <input type="date" disabled>
+                                        </div>
+                                        <div class="field-group">
+                                            <label>Passport Number for this Citizenship (if any)</label>
+                                            <input type="text" disabled placeholder="If applicable">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="field-row" style="margin-top: 15px;">
                             <div class="field-group">
                                 <label>Are you a permanent resident of a country other than your country of citizenship?</label>
                                 <select disabled><option>Select Yes/No</option><option>Yes</option><option>No</option></select>
@@ -325,6 +426,14 @@
                             <div class="field-group">
                                 <label>Country of Permanent Residence</label>
                                 <input type="text" disabled placeholder="If different from citizenship">
+                            </div>
+                            <div class="field-group">
+                                <label>Permanent Resident Card/ID Number</label>
+                                <input type="text" disabled placeholder="If applicable">
+                            </div>
+                            <div class="field-group">
+                                <label>Date Permanent Residency Obtained</label>
+                                <input type="date" disabled>
                             </div>
                         </div>
                     </div>
@@ -399,9 +508,64 @@
                                 <label>Have you ever lost a passport or had one stolen?</label>
                                 <select disabled><option>Select Yes/No</option><option>Yes</option><option>No</option></select>
                             </div>
-                            <div class="field-group full-width">
-                                <label>If yes, explain circumstances (passport number, date, location, police report filed)</label>
-                                <textarea disabled placeholder="Provide full details if applicable"></textarea>
+                        </div>
+
+                        <!-- Lost/Stolen Passports Repeater -->
+                        <div class="repeater-section" style="margin-top: 15px;">
+                            <div class="repeater-header">
+                                <h4>Lost/Stolen Passport Details <span class="entry-count">(1 entry)</span></h4>
+                                <button type="button" class="btn-add-item" disabled>+ Add Another Lost/Stolen Passport</button>
+                            </div>
+                            <div class="repeater-items">
+                                <div class="lost-passport-entry">
+                                    <h4>Lost/Stolen Passport 1</h4>
+                                    <div class="field-row">
+                                        <div class="field-group">
+                                            <label>Passport Number</label>
+                                            <input type="text" disabled placeholder="Required">
+                                        </div>
+                                        <div class="field-group">
+                                            <label>Country That Issued Passport</label>
+                                            <input type="text" disabled placeholder="Required">
+                                        </div>
+                                        <div class="field-group">
+                                            <label>Date Lost/Stolen</label>
+                                            <input type="date" disabled>
+                                        </div>
+                                        <div class="field-group">
+                                            <label>Lost or Stolen?</label>
+                                            <select disabled>
+                                                <option>Select...</option>
+                                                <option>Lost</option>
+                                                <option>Stolen</option>
+                                            </select>
+                                        </div>
+                                        <div class="field-group">
+                                            <label>City Where Lost/Stolen</label>
+                                            <input type="text" disabled placeholder="Required">
+                                        </div>
+                                        <div class="field-group">
+                                            <label>Country Where Lost/Stolen</label>
+                                            <input type="text" disabled placeholder="Required">
+                                        </div>
+                                        <div class="field-group">
+                                            <label>Was a Police Report Filed?</label>
+                                            <select disabled><option>Select Yes/No</option><option>Yes</option><option>No</option></select>
+                                        </div>
+                                        <div class="field-group">
+                                            <label>Police Report Number</label>
+                                            <input type="text" disabled placeholder="If filed">
+                                        </div>
+                                        <div class="field-group">
+                                            <label>Police Department Name</label>
+                                            <input type="text" disabled placeholder="If filed">
+                                        </div>
+                                        <div class="field-group full-width">
+                                            <label>Explain Circumstances</label>
+                                            <textarea disabled placeholder="Provide full details of how the passport was lost or stolen"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -506,16 +670,24 @@
                 <!-- Social Media Section -->
                 <fieldset class="form-fieldset">
                     <legend><span class="status-badge current">CURRENT</span> Section D: Social Media Disclosure (Past 5 Years)</legend>
-                    <p class="fieldset-notice">You must disclose ALL accounts on the following 20 platforms. For F/M/J/H-1B visas, profiles must be set to PUBLIC before your interview (effective June 18, 2025 for students; Dec 15, 2025 for workers).</p>
+                    <p class="fieldset-notice">You must disclose ALL accounts on the following 20 platforms, including multiple accounts on the same platform. For F/M/J/H-1B visas, profiles must be set to PUBLIC before your interview (effective June 18, 2025 for students; Dec 15, 2025 for workers).</p>
                     <p class="source-cite">Source: DS-160 Form; Federal Register Dec 10, 2025</p>
                     <div class="social-platforms">
                         <div class="platform-grid" id="socialMediaFields">
                             <!-- Generated dynamically -->
                         </div>
                     </div>
-                    <div class="field-group full-width">
+                    <div class="field-group full-width" style="margin-top: 20px;">
                         <label>List any additional social media platforms not listed above:</label>
-                        <textarea disabled placeholder="Required - List ALL platforms"></textarea>
+                        <textarea disabled placeholder="Required - List ALL platforms including personal blogs, forums, messaging apps, etc."></textarea>
+                    </div>
+                    <div class="field-group full-width">
+                        <label><span class="status-badge-inline proposed">PROPOSED</span> Have you ever deleted, deactivated, or changed the privacy settings of any social media account?</label>
+                        <select disabled><option>Select Yes/No</option><option>Yes</option><option>No</option></select>
+                    </div>
+                    <div class="field-group full-width">
+                        <label>If yes, provide details of all deleted/deactivated accounts (platform, username, dates active, reason for deletion):</label>
+                        <textarea disabled placeholder="Required if applicable - include ALL previously deleted accounts"></textarea>
                     </div>
                 </fieldset>
 

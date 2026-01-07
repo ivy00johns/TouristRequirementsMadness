@@ -559,7 +559,7 @@ function calculateEstimatedFields() {
 
     let estimate = 50; // Base personal info fields (expanded: name, aliases, birth, sex, marital, citizenship, IDs, passport, contact)
     estimate += 7; // Biometrics
-    estimate += Math.max(getValue('socialMediaCount'), socialPlatforms.length) * 3;
+    estimate += Math.max(getValue('socialMediaCount'), socialPlatforms.length) * 5; // 5 fields per account
     estimate += getValue('emailCount') * 5;
     estimate += getValue('phoneCount') * 5;
 
@@ -620,35 +620,66 @@ function generateSocialMediaFields(count) {
     container.innerHTML = '';
 
     socialPlatforms.forEach(platform => {
-        const div = document.createElement('div');
-        div.className = 'platform-item';
-        div.innerHTML = `
-            <span class="platform-name">${platform}</span>
-            <input type="text" disabled placeholder="Username (Required)">
-            <input type="text" disabled placeholder="Profile URL (Required)">
-            <select disabled>
-                <option>Account Status</option>
-                <option>Active</option>
-                <option>Inactive</option>
-                <option>Deleted</option>
-            </select>
+        const platformDiv = document.createElement('div');
+        platformDiv.className = 'platform-section';
+        platformDiv.innerHTML = `
+            <div class="platform-header">
+                <span class="platform-name">${platform}</span>
+                <button type="button" class="btn-add-account" disabled>+ Add Another ${platform} Account</button>
+            </div>
+            <div class="platform-accounts">
+                <div class="platform-item">
+                    <span class="account-label">Account 1</span>
+                    <input type="text" disabled placeholder="Username (Required)">
+                    <input type="text" disabled placeholder="Profile URL (Required)">
+                    <select disabled>
+                        <option>Account Status</option>
+                        <option>Active</option>
+                        <option>Inactive</option>
+                        <option>Deleted</option>
+                    </select>
+                    <input type="text" disabled placeholder="Date Created (MM/YYYY)">
+                    <select disabled>
+                        <option>Account Visibility</option>
+                        <option>Public</option>
+                        <option>Private</option>
+                        <option>Friends Only</option>
+                    </select>
+                </div>
+            </div>
         `;
-        container.appendChild(div);
-        totalFieldCount += 3;
+        container.appendChild(platformDiv);
+        totalFieldCount += 5; // 5 fields per account (username, URL, status, date created, visibility)
     });
 
+    // Additional platforms beyond the 20 required
     if (count > socialPlatforms.length) {
         for (let i = 0; i < count - socialPlatforms.length; i++) {
             const div = document.createElement('div');
-            div.className = 'platform-item additional';
+            div.className = 'platform-section additional';
             div.innerHTML = `
-                <span class="platform-name">Additional Account ${i + 1}</span>
-                <input type="text" disabled placeholder="Platform Name">
-                <input type="text" disabled placeholder="Username">
-                <input type="text" disabled placeholder="Profile URL">
+                <div class="platform-header">
+                    <span class="platform-name">Additional Platform ${i + 1}</span>
+                    <button type="button" class="btn-add-account" disabled>+ Add Another Account</button>
+                </div>
+                <div class="platform-accounts">
+                    <div class="platform-item">
+                        <span class="account-label">Account 1</span>
+                        <input type="text" disabled placeholder="Platform Name (Required)">
+                        <input type="text" disabled placeholder="Username (Required)">
+                        <input type="text" disabled placeholder="Profile URL (Required)">
+                        <select disabled>
+                            <option>Account Status</option>
+                            <option>Active</option>
+                            <option>Inactive</option>
+                            <option>Deleted</option>
+                        </select>
+                        <input type="text" disabled placeholder="Date Created (MM/YYYY)">
+                    </div>
+                </div>
             `;
             container.appendChild(div);
-            totalFieldCount += 3;
+            totalFieldCount += 5;
         }
     }
 }
