@@ -158,52 +158,302 @@
                 <!-- Personal Information -->
                 <fieldset class="form-fieldset">
                     <legend>Section B: Personal Information</legend>
-                    <div class="field-grid" id="personalFields">
-                        <div class="field-group">
-                            <label>Full Legal Name (as on passport)</label>
-                            <input type="text" disabled placeholder="Required">
+                    <p class="source-cite">Source: DS-160 Online Nonimmigrant Visa Application; DS-5535 Supplemental Questions</p>
+
+                    <!-- B-1: Full Legal Name -->
+                    <div class="subsection">
+                        <h5>B-1: Full Legal Name (Exactly as shown on passport)</h5>
+                        <div class="field-row">
+                            <div class="field-group">
+                                <label>Surname / Family Name</label>
+                                <input type="text" disabled placeholder="Required">
+                            </div>
+                            <div class="field-group">
+                                <label>Given Name(s) / First Name(s)</label>
+                                <input type="text" disabled placeholder="Required">
+                            </div>
+                            <div class="field-group">
+                                <label>Middle Name(s)</label>
+                                <input type="text" disabled placeholder="If applicable">
+                            </div>
+                            <div class="field-group">
+                                <label>Full Name in Native Alphabet (if not Roman)</label>
+                                <input type="text" disabled placeholder="If applicable">
+                            </div>
                         </div>
-                        <div class="field-group">
-                            <label>All Previous Names Used</label>
-                            <input type="text" disabled placeholder="Required">
+                    </div>
+
+                    <!-- B-2: Other Names / Aliases -->
+                    <div class="subsection">
+                        <h5>B-2: Other Names Used (Aliases, Maiden Names, Religious Names, Professional Names)</h5>
+                        <p class="fieldset-notice">List ALL other names you have ever used, including nicknames, maiden names, married names, aliases, religious names, professional names, stage names, or tribal names.</p>
+                        <div class="field-row">
+                            <div class="field-group">
+                                <label>Have you ever used any other names?</label>
+                                <select disabled><option>Select Yes/No</option><option>Yes</option><option>No</option></select>
+                            </div>
                         </div>
-                        <div class="field-group">
-                            <label>Date of Birth</label>
-                            <input type="date" disabled>
+                        <div id="aliasFields" class="repeater-items">
+                            <div class="alias-entry">
+                                <div class="field-row">
+                                    <div class="field-group">
+                                        <label>Other Surname / Family Name</label>
+                                        <input type="text" disabled placeholder="Required if applicable">
+                                    </div>
+                                    <div class="field-group">
+                                        <label>Other Given Name(s)</label>
+                                        <input type="text" disabled placeholder="Required if applicable">
+                                    </div>
+                                    <div class="field-group">
+                                        <label>Type of Name</label>
+                                        <select disabled>
+                                            <option>Select Type</option>
+                                            <option>Maiden Name</option>
+                                            <option>Previous Married Name</option>
+                                            <option>Nickname/Alias</option>
+                                            <option>Religious Name</option>
+                                            <option>Professional/Stage Name</option>
+                                            <option>Tribal Name</option>
+                                            <option>Legal Name Change</option>
+                                            <option>Other</option>
+                                        </select>
+                                    </div>
+                                    <div class="field-group">
+                                        <label>Dates Used (From - To)</label>
+                                        <input type="text" disabled placeholder="MM/YYYY - MM/YYYY">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="field-group">
-                            <label>Place of Birth (City)</label>
-                            <input type="text" disabled placeholder="Required">
+                    </div>
+
+                    <!-- B-3: Birth Information -->
+                    <div class="subsection">
+                        <h5>B-3: Birth Information</h5>
+                        <div class="field-row">
+                            <div class="field-group">
+                                <label>Date of Birth</label>
+                                <input type="date" disabled>
+                            </div>
+                            <div class="field-group">
+                                <label>City of Birth</label>
+                                <input type="text" disabled placeholder="Required">
+                            </div>
+                            <div class="field-group">
+                                <label>State/Province of Birth</label>
+                                <input type="text" disabled placeholder="If applicable">
+                            </div>
+                            <div class="field-group">
+                                <label>Country of Birth</label>
+                                <input type="text" disabled placeholder="Required">
+                            </div>
                         </div>
-                        <div class="field-group">
-                            <label>Place of Birth (Country)</label>
-                            <input type="text" disabled placeholder="Required">
+                    </div>
+
+                    <!-- B-4: Sex and Gender -->
+                    <div class="subsection">
+                        <h5>B-4: Sex</h5>
+                        <div class="field-row">
+                            <div class="field-group">
+                                <label>Sex (as listed on passport)</label>
+                                <select disabled>
+                                    <option>Select...</option>
+                                    <option>Male</option>
+                                    <option>Female</option>
+                                </select>
+                            </div>
                         </div>
-                        <div class="field-group">
-                            <label>Biological Sex</label>
-                            <select disabled>
-                                <option>Select...</option>
-                            </select>
+                    </div>
+
+                    <!-- B-5: Marital Status -->
+                    <div class="subsection">
+                        <h5>B-5: Marital Status</h5>
+                        <div class="field-row">
+                            <div class="field-group">
+                                <label>Current Marital Status</label>
+                                <select disabled>
+                                    <option>Select Status</option>
+                                    <option>Single/Never Married</option>
+                                    <option>Married</option>
+                                    <option>Common Law Marriage</option>
+                                    <option>Civil Union/Domestic Partnership</option>
+                                    <option>Widowed</option>
+                                    <option>Divorced</option>
+                                    <option>Legally Separated</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
+                            <div class="field-group">
+                                <label>Date of Marriage (if married)</label>
+                                <input type="date" disabled>
+                            </div>
+                            <div class="field-group">
+                                <label>Place of Marriage (City, Country)</label>
+                                <input type="text" disabled placeholder="If applicable">
+                            </div>
+                            <div class="field-group">
+                                <label>Have you been previously married?</label>
+                                <select disabled><option>Select Yes/No</option><option>Yes</option><option>No</option></select>
+                            </div>
+                            <div class="field-group">
+                                <label>Number of Previous Marriages</label>
+                                <input type="number" disabled placeholder="If applicable" min="0">
+                            </div>
                         </div>
-                        <div class="field-group">
-                            <label>National ID Number</label>
-                            <input type="text" disabled placeholder="Required">
+                    </div>
+
+                    <!-- B-6: Nationality and Citizenship -->
+                    <div class="subsection">
+                        <h5>B-6: Nationality and Citizenship</h5>
+                        <div class="field-row">
+                            <div class="field-group">
+                                <label>Country of Citizenship/Nationality</label>
+                                <input type="text" disabled placeholder="Required">
+                            </div>
+                            <div class="field-group">
+                                <label>Do you hold or have you held any other nationality?</label>
+                                <select disabled><option>Select Yes/No</option><option>Yes</option><option>No</option></select>
+                            </div>
+                            <div class="field-group">
+                                <label>Other Country/Countries of Citizenship (past or present)</label>
+                                <input type="text" disabled placeholder="List all if applicable">
+                            </div>
+                            <div class="field-group">
+                                <label>Are you a permanent resident of a country other than your country of citizenship?</label>
+                                <select disabled><option>Select Yes/No</option><option>Yes</option><option>No</option></select>
+                            </div>
+                            <div class="field-group">
+                                <label>Country of Permanent Residence</label>
+                                <input type="text" disabled placeholder="If different from citizenship">
+                            </div>
                         </div>
-                        <div class="field-group">
-                            <label>Passport Number</label>
-                            <input type="text" disabled placeholder="Required">
+                    </div>
+
+                    <!-- B-7: National Identification -->
+                    <div class="subsection">
+                        <h5>B-7: National Identification Numbers</h5>
+                        <div class="field-row">
+                            <div class="field-group">
+                                <label>National Identification Number</label>
+                                <input type="text" disabled placeholder="Required if issued by your country">
+                            </div>
+                            <div class="field-group">
+                                <label>U.S. Social Security Number (if any)</label>
+                                <input type="text" disabled placeholder="If you have one">
+                            </div>
+                            <div class="field-group">
+                                <label>U.S. Taxpayer ID Number (if any)</label>
+                                <input type="text" disabled placeholder="If you have one">
+                            </div>
                         </div>
-                        <div class="field-group">
-                            <label>Passport Issue Date</label>
-                            <input type="date" disabled>
+                    </div>
+
+                    <!-- B-8: Passport Information -->
+                    <div class="subsection">
+                        <h5>B-8: Passport / Travel Document Information</h5>
+                        <div class="field-row">
+                            <div class="field-group">
+                                <label>Passport/Travel Document Type</label>
+                                <select disabled>
+                                    <option>Select Type</option>
+                                    <option>Regular/Tourist Passport</option>
+                                    <option>Official/Service Passport</option>
+                                    <option>Diplomatic Passport</option>
+                                    <option>Laissez-Passer</option>
+                                    <option>Other Travel Document</option>
+                                </select>
+                            </div>
+                            <div class="field-group">
+                                <label>Passport/Travel Document Number</label>
+                                <input type="text" disabled placeholder="Required">
+                            </div>
+                            <div class="field-group">
+                                <label>Passport Book Number (if shown)</label>
+                                <input type="text" disabled placeholder="If applicable">
+                            </div>
+                            <div class="field-group">
+                                <label>Country/Authority That Issued Passport</label>
+                                <input type="text" disabled placeholder="Required">
+                            </div>
+                            <div class="field-group">
+                                <label>City Where Issued</label>
+                                <input type="text" disabled placeholder="Required">
+                            </div>
+                            <div class="field-group">
+                                <label>State/Province Where Issued</label>
+                                <input type="text" disabled placeholder="If applicable">
+                            </div>
+                            <div class="field-group">
+                                <label>Country Where Issued</label>
+                                <input type="text" disabled placeholder="Required">
+                            </div>
+                            <div class="field-group">
+                                <label>Issuance Date</label>
+                                <input type="date" disabled>
+                            </div>
+                            <div class="field-group">
+                                <label>Expiration Date</label>
+                                <input type="date" disabled>
+                            </div>
+                            <div class="field-group">
+                                <label>Have you ever lost a passport or had one stolen?</label>
+                                <select disabled><option>Select Yes/No</option><option>Yes</option><option>No</option></select>
+                            </div>
+                            <div class="field-group full-width">
+                                <label>If yes, explain circumstances (passport number, date, location, police report filed)</label>
+                                <textarea disabled placeholder="Provide full details if applicable"></textarea>
+                            </div>
                         </div>
-                        <div class="field-group">
-                            <label>Passport Expiry Date</label>
-                            <input type="date" disabled>
-                        </div>
-                        <div class="field-group">
-                            <label>Passport Issuing Authority</label>
-                            <input type="text" disabled placeholder="Required">
+                    </div>
+
+                    <!-- B-9: Contact Information -->
+                    <div class="subsection">
+                        <h5>B-9: Current Contact Information</h5>
+                        <div class="field-row">
+                            <div class="field-group">
+                                <label>Current Home Address - Street</label>
+                                <input type="text" disabled placeholder="Required">
+                            </div>
+                            <div class="field-group">
+                                <label>Current Home Address - City</label>
+                                <input type="text" disabled placeholder="Required">
+                            </div>
+                            <div class="field-group">
+                                <label>Current Home Address - State/Province</label>
+                                <input type="text" disabled placeholder="Required">
+                            </div>
+                            <div class="field-group">
+                                <label>Current Home Address - Postal Code</label>
+                                <input type="text" disabled placeholder="Required">
+                            </div>
+                            <div class="field-group">
+                                <label>Current Home Address - Country</label>
+                                <input type="text" disabled placeholder="Required">
+                            </div>
+                            <div class="field-group">
+                                <label>Is your mailing address the same as your home address?</label>
+                                <select disabled><option>Select Yes/No</option><option>Yes</option><option>No</option></select>
+                            </div>
+                            <div class="field-group">
+                                <label>Mailing Address (if different)</label>
+                                <input type="text" disabled placeholder="If different from home address">
+                            </div>
+                            <div class="field-group">
+                                <label>Primary Phone Number</label>
+                                <input type="tel" disabled placeholder="Required">
+                            </div>
+                            <div class="field-group">
+                                <label>Secondary Phone Number</label>
+                                <input type="tel" disabled placeholder="If applicable">
+                            </div>
+                            <div class="field-group">
+                                <label>Work Phone Number</label>
+                                <input type="tel" disabled placeholder="If applicable">
+                            </div>
+                            <div class="field-group">
+                                <label>Primary Email Address</label>
+                                <input type="email" disabled placeholder="Required">
+                            </div>
                         </div>
                     </div>
                 </fieldset>

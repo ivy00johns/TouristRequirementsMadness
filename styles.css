@@ -1312,12 +1312,13 @@ footer p {
     padding: 20px;
 }
 
-/* Education, US Travel, Contact, Itinerary entries */
+/* Education, US Travel, Contact, Itinerary, Alias entries */
 .education-entry,
 .us-travel-entry,
 .contact-entry,
 .itinerary-entry,
-.organization-entry {
+.organization-entry,
+.alias-entry {
     background: white;
     border: 1px solid #ddd;
     padding: 20px;
@@ -1329,11 +1330,19 @@ footer p {
 .us-travel-entry h4,
 .contact-entry h4,
 .itinerary-entry h4,
-.organization-entry h4 {
+.organization-entry h4,
+.alias-entry h4 {
     color: #2c5282;
     margin-bottom: 15px;
     padding-bottom: 10px;
     border-bottom: 1px solid #e2e8f0;
+}
+
+/* Field grid for personal info section */
+.field-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
 }
 
 /* Hidden class */

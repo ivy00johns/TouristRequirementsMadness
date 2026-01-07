@@ -557,7 +557,7 @@ function showFormAnyway() {
 function calculateEstimatedFields() {
     const getValue = (id) => parseInt(document.getElementById(id)?.value) || 0;
 
-    let estimate = 11; // Base personal info fields
+    let estimate = 50; // Base personal info fields (expanded: name, aliases, birth, sex, marital, citizenship, IDs, passport, contact)
     estimate += 7; // Biometrics
     estimate += Math.max(getValue('socialMediaCount'), socialPlatforms.length) * 3;
     estimate += getValue('emailCount') * 5;
@@ -888,7 +888,7 @@ function generateForm() {
         }
     }
 
-    totalFieldCount = 11; // Base personal info
+    totalFieldCount = 50; // Base personal info (expanded: name, aliases, birth, sex, marital, citizenship, IDs, passport, contact)
 
     generateSocialMediaFields(getValue('socialMediaCount'));
     generateEmailFields(getValue('emailCount'));
