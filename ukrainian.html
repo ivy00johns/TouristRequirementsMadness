@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ukrainian Refugee Status - The Impossible Compliance Calculator</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Site Header -->
+        <div class="site-header">
+            <h1 class="site-title">WELCOME TO AMERICA</h1>
+            <p class="site-subtitle">A Collection of Immigration Paperwork Nightmares</p>
+        </div>
+
+        <!-- Tab Navigation -->
+        <nav class="tab-navigation">
+            <a href="index.html" class="tab">
+                <span class="tab-icon">🛂</span>
+                <span class="tab-label">Tourist Visa</span>
+                <span class="tab-desc">39 banned countries, DNA required</span>
+            </a>
+            <a href="ukrainian.html" class="tab active">
+                <span class="tab-icon">🇺🇦</span>
+                <span class="tab-label">Ukrainian Refugees</span>
+                <span class="tab-desc">Escaped a war, trapped in limbo</span>
+            </a>
+            <a href="#" class="tab disabled">
+                <span class="tab-icon">🔒</span>
+                <span class="tab-label">Coming Soon</span>
+                <span class="tab-desc">H-1B, Asylum, DACA...</span>
+            </a>
+        </nav>
+
+        <header class="official-header ukrainian-header">
+            <div class="seal"></div>
+            <h1>U.S. Citizenship and Immigration Services</h1>
+            <h2>Ukrainian Refugee Status Calculator</h2>
+            <p class="form-number">The Impossible Compliance Calculator</p>
+            <p class="subtitle">Uniting for Ukraine (U4U) & Temporary Protected Status (TPS)</p>
+        </header>
+
+        <div class="warning-banner ukraine-warning">
+            <strong>⚠️ PROGRAM STATUS:</strong> U4U re-parole applications are currently <strong>PAUSED</strong> (as of Jan 27, 2025).
+            ~280,000 Ukrainians are affected by processing backlogs and program uncertainty.
+        </div>
+
+        <div class="demo-notice">
+            <strong>DEMONSTRATION ONLY:</strong> This calculator illustrates the structural impossibilities facing Ukrainian refugees.
+            It exists to show how timelines, fees, and processing times create inescapable bureaucratic traps.
+            <strong>This is not legal advice.</strong>
+        </div>
+
+        <div class="status-legend">
+            <h4>Status Key:</h4>
+            <div class="legend-items">
+                <span class="legend-item current"><span class="status-dot"></span> Currently in effect</span>
+                <span class="legend-item paused"><span class="status-dot"></span> Program paused</span>
+                <span class="legend-item non-waivable"><span class="status-dot"></span> Non-waivable fee</span>
+            </div>
+        </div>
+
+        <!-- Phase 1: Status Selection -->
+        <section id="phase1" class="form-section">
+            <h3>Section A: Your Current Status</h3>
+            <p class="section-desc">Tell us about your immigration situation to see what you're facing.</p>
+
+            <div class="question-group">
+                <label>What is your current immigration status?</label>
+                <div class="status-options">
+                    <label class="status-option">
+                        <input type="radio" name="currentStatus" value="u4u" id="statusU4U">
+                        <span class="option-content">
+                            <span class="option-title">Uniting for Ukraine (U4U) Parolee</span>
+                            <span class="option-desc">Arrived through the U4U humanitarian parole program</span>
+                        </span>
+                    </label>
+                    <label class="status-option">
+                        <input type="radio" name="currentStatus" value="tps" id="statusTPS">
+                        <span class="option-content">
+                            <span class="option-title">Temporary Protected Status (TPS) Holder</span>
+                            <span class="option-desc">Registered for TPS (arrived before Aug 16, 2023)</span>
+                        </span>
+                    </label>
+                    <label class="status-option">
+                        <input type="radio" name="currentStatus" value="both" id="statusBoth">
+                        <span class="option-content">
+                            <span class="option-title">Both U4U and TPS</span>
+                            <span class="option-desc">Have U4U parole and also registered for TPS</span>
+                        </span>
+                    </label>
+                    <label class="status-option">
+                        <input type="radio" name="currentStatus" value="pending" id="statusPending">
+                        <span class="option-content">
+                            <span class="option-title">Application Pending</span>
+                            <span class="option-desc">Waiting for decision on re-parole or TPS</span>
+                        </span>
+                    </label>
+                    <label class="status-option expired-option">
+                        <input type="radio" name="currentStatus" value="expired" id="statusExpired">
+                        <span class="option-content">
+                            <span class="option-title">Status Expired / In Limbo</span>
+                            <span class="option-desc">Previous status has expired, no current authorization</span>
+                        </span>
+                    </label>
+                </div>
+            </div>
+
+            <div id="dateQuestions" class="hidden">
+                <div class="question-group">
+                    <label for="arrivalDate">When did you arrive in the United States?</label>
+                    <input type="month" id="arrivalDate" class="date-input">
+                    <p class="input-hint">This determines your TPS eligibility (cutoff: August 16, 2023)</p>
+                </div>
+
+                <div class="question-group">
+                    <label for="expirationDate">When does your current status expire?</label>
+                    <input type="month" id="expirationDate" class="date-input">
+                    <p class="input-hint">For U4U parolees, this is typically 2 years from arrival</p>
+                </div>
+
+                <div class="question-group">
+                    <label for="familyAdults">How many adults (18+) in your household need status?</label>
+                    <input type="number" id="familyAdults" min="1" max="10" value="1" class="number-input">
+                </div>
+
+                <div class="question-group">
+                    <label for="familyChildren">How many children (under 18) in your household need status?</label>
+                    <input type="number" id="familyChildren" min="0" max="10" value="0" class="number-input">
+                </div>
+
+                <button id="calculateSituation" class="btn-primary">Calculate My Situation</button>
+            </div>
+        </section>
+
+        <!-- Phase 2: Situation Analysis (hidden until calculated) -->
+        <section id="situationAnalysis" class="form-section hidden">
+            <h3>⚠️ Your Situation Analysis</h3>
+
+            <div class="analysis-box" id="analysisBox">
+                <!-- Dynamically populated -->
+            </div>
+
+            <div class="tps-eligibility-box" id="tpsEligibility">
+                <!-- Dynamically populated -->
+            </div>
+        </section>
+
+        <!-- Phase 3: Timeline Visualizer -->
+        <section id="timelineSection" class="form-section hidden">
+            <h3>📅 The Impossible Timeline</h3>
+            <p class="section-desc">See why the math doesn't work</p>
+
+            <div class="timeline-container" id="timelineContainer">
+                <!-- Dynamically populated -->
+            </div>
+
+            <div class="math-breakdown">
+                <h4>⚠️ THE MATH DOESN'T WORK</h4>
+                <div class="math-row">
+                    <span class="math-label">Filing Window:</span>
+                    <span class="math-value">180 days maximum</span>
+                </div>
+                <div class="math-row">
+                    <span class="math-label">Processing Time:</span>
+                    <span class="math-value">240-540 days (8-18 months)</span>
+                </div>
+                <div class="math-row result">
+                    <span class="math-label">GUARANTEED GAP:</span>
+                    <span class="math-value" id="gapDays">60-360 days</span>
+                </div>
+                <p class="math-note">Source: USCIS official processing times (Dec 2025)</p>
+            </div>
+        </section>
+
+        <!-- Phase 4: Fee Calculator -->
+        <section id="feeSection" class="form-section hidden">
+            <h3>💰 Fee Explosion Calculator</h3>
+            <p class="section-desc">What it costs to stay legal</p>
+
+            <div class="fee-calculator">
+                <table class="fee-table">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Per Person</th>
+                            <th>Your Family</th>
+                            <th>Waivable?</th>
+                        </tr>
+                    </thead>
+                    <tbody id="feeTableBody">
+                        <!-- Dynamically populated -->
+                    </tbody>
+                    <tfoot>
+                        <tr class="fee-total-row">
+                            <td colspan="2"><strong>TOTAL</strong></td>
+                            <td id="totalFee"><strong>$0</strong></td>
+                            <td></td>
+                        </tr>
+                    </tfoot>
+                </table>
+
+                <div class="fee-trap-box">
+                    <h4>💀 THE TRAP:</h4>
+                    <ul>
+                        <li>You cannot work during the gap period</li>
+                        <li>But you must pay <span id="trapFeeAmount">$0</span> during the gap period</li>
+                        <li>If you can't pay, you can't apply</li>
+                        <li>If you don't apply, you become undocumented</li>
+                        <li>If you become undocumented, you can be deported</li>
+                        <li><strong>TO A COUNTRY AT WAR</strong></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="fee-comparison">
+                <h4>📊 Fee Comparison: Then vs Now</h4>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Before 2025</th>
+                            <th>After H.R. 1</th>
+                            <th>Increase</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>TPS Registration</td>
+                            <td>$50</td>
+                            <td>$500</td>
+                            <td class="increase">+900%</td>
+                        </tr>
+                        <tr>
+                            <td>EAD Initial</td>
+                            <td>$410</td>
+                            <td>$1,095*</td>
+                            <td class="increase">+167%</td>
+                        </tr>
+                        <tr>
+                            <td>Parole Grant Fee</td>
+                            <td>$0</td>
+                            <td>$1,000</td>
+                            <td class="increase">NEW</td>
+                        </tr>
+                        <tr>
+                            <td>EAD Renewal (H.R.1)</td>
+                            <td>$0</td>
+                            <td>$275</td>
+                            <td class="increase">NEW</td>
+                        </tr>
+                        <tr class="comparison-total">
+                            <td><strong>Family of 4</strong></td>
+                            <td>~$1,840</td>
+                            <td>$9,300+</td>
+                            <td class="increase"><strong>+405%</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="table-note">* EAD now includes non-waivable $550 H.R.1 fee</p>
+                <p class="source-cite">Source: H.R. 1 (Laken Riley Act); USCIS Fee Schedule 2025</p>
+            </div>
+        </section>
+
+        <!-- Phase 5: Processing Freeze Timeline -->
+        <section id="freezeSection" class="form-section hidden">
+            <h3>📅 The Four-Month Freeze</h3>
+            <p class="section-desc">What happened to applications in early 2025</p>
+
+            <div class="freeze-timeline">
+                <div class="freeze-event">
+                    <div class="freeze-date">Jan 20, 2025</div>
+                    <div class="freeze-content">
+                        <strong>Executive Order 14165 signed</strong>
+                        <p>"Terminate all categorical parole programs"</p>
+                    </div>
+                </div>
+                <div class="freeze-event">
+                    <div class="freeze-date">Jan 27, 2025</div>
+                    <div class="freeze-content">
+                        <strong>U4U new applications PAUSED</strong>
+                        <p>No public announcement - just stopped processing</p>
+                    </div>
+                </div>
+                <div class="freeze-event major">
+                    <div class="freeze-date">Feb 14, 2025</div>
+                    <div class="freeze-content">
+                        <strong>USCIS TOTAL FREEZE MEMO</strong>
+                        <p>ALL applications from parolees placed on hold:</p>
+                        <ul>
+                            <li>❄️ TPS applications</li>
+                            <li>❄️ Asylum applications</li>
+                            <li>❄️ Green card petitions</li>
+                            <li>❄️ Employment authorization</li>
+                            <li>❄️ Re-parole applications</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="freeze-event">
+                    <div class="freeze-date">Apr 14, 2025</div>
+                    <div class="freeze-content">
+                        <strong>Svitlana Doe v. Noem lawsuit</strong>
+                        <p>Judge issues preliminary injunction</p>
+                    </div>
+                </div>
+                <div class="freeze-event">
+                    <div class="freeze-date">May 28, 2025</div>
+                    <div class="freeze-content">
+                        <strong>Court ORDERS processing to resume</strong>
+                        <p>Government appeals to Supreme Court</p>
+                    </div>
+                </div>
+                <div class="freeze-event">
+                    <div class="freeze-date">May 30, 2025</div>
+                    <div class="freeze-content">
+                        <strong>Supreme Court grants stay for CHNV</strong>
+                        <p>532,000 Cubans/Haitians/Venezuelans: terminated</p>
+                        <p>Ukrainians: processing may resume</p>
+                    </div>
+                </div>
+                <div class="freeze-event">
+                    <div class="freeze-date">Jun 9, 2025</div>
+                    <div class="freeze-content">
+                        <strong>USCIS resumes processing</strong>
+                        <p>114 days frozen. Backlogs remain: 11.3 MILLION cases</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="freeze-impact-box">
+                <h4>Impact During Freeze:</h4>
+                <ul>
+                    <li>No applications were processed</li>
+                    <li>No decisions were issued</li>
+                    <li>Status continued to expire</li>
+                    <li>People lost work authorization</li>
+                    <li>Backlogs accumulated to <strong>11.3 MILLION</strong> cases</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Phase 6: What Happens If Scenarios -->
+        <section id="scenarioSection" class="form-section hidden">
+            <h3>🎯 What Happens If...</h3>
+            <p class="section-desc">Click each scenario to see the consequences</p>
+
+            <div class="scenarios">
+                <div class="scenario">
+                    <button class="scenario-header" onclick="toggleScenario('scenario1')">
+                        <span>My status expires before my application is decided</span>
+                        <span class="scenario-toggle">▼</span>
+                    </button>
+                    <div class="scenario-content hidden" id="scenario1">
+                        <ul>
+                            <li>❌ Your work authorization expires immediately</li>
+                            <li>❌ You must stop working (or work illegally)</li>
+                            <li>❌ You begin accruing "unlawful presence"</li>
+                            <li>❌ After 180 days: 3-year bar from reentry</li>
+                            <li>❌ After 365 days: 10-year bar from reentry</li>
+                            <li>❌ You may be placed in removal proceedings</li>
+                        </ul>
+                        <div class="scenario-quote">
+                            <p>⚠️ <strong>BUT:</strong> A pending application is NOT status</p>
+                            <p class="quote-source">"A pending application does not confer any immigration status or authorized stay." — USCIS Policy</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="scenario">
+                    <button class="scenario-header" onclick="toggleScenario('scenario2')">
+                        <span>I can't afford the fees</span>
+                        <span class="scenario-toggle">▼</span>
+                    </button>
+                    <div class="scenario-content hidden" id="scenario2">
+                        <p><strong>Fee waiver available?</strong> PARTIAL</p>
+                        <ul>
+                            <li>✓ I-131 filing fee: May be waivable (Form I-912)</li>
+                            <li>✓ I-765 filing fee: May be waivable (Form I-912)</li>
+                            <li>❌ H.R. 1 EAD fee ($275): <strong>NON-WAIVABLE</strong></li>
+                            <li>❌ Parole grant fee ($1,000): <strong>NON-WAIVABLE</strong></li>
+                        </ul>
+                        <div class="scenario-math">
+                            <p>MINIMUM COST EVEN WITH FEE WAIVER: <strong>$1,275 per person</strong></p>
+                            <p>Family of 4 minimum: <strong>$5,100</strong></p>
+                        </div>
+                        <p class="scenario-consequence">If you can't pay → You can't apply → Your status expires → See scenario above</p>
+                    </div>
+                </div>
+
+                <div class="scenario">
+                    <button class="scenario-header" onclick="toggleScenario('scenario3')">
+                        <span>I receive a denial</span>
+                        <span class="scenario-toggle">▼</span>
+                    </button>
+                    <div class="scenario-content hidden" id="scenario3">
+                        <p><strong>No administrative appeal available</strong> for parole denial</p>
+                        <p>Options:</p>
+                        <ul>
+                            <li>File new application (pay all fees again)</li>
+                            <li>Seek other status (asylum, family petition, etc.)</li>
+                            <li>Federal court challenge (requires attorney, $10,000+)</li>
+                            <li>Depart the United States</li>
+                        </ul>
+                        <div class="scenario-warning">
+                            <p>⚠️ If you're in the US without status after denial:</p>
+                            <p><strong>You are deportable. ICE may arrest you at any time.</strong></p>
+                        </div>
+                        <p class="scenario-news">📰 Documented cases: Ukrainian woman arrested at her green card interview. Father arrested at O'Hare.</p>
+                    </div>
+                </div>
+
+                <div class="scenario">
+                    <button class="scenario-header" onclick="toggleScenario('scenario4')">
+                        <span>I get an "erroneous" notice to leave</span>
+                        <span class="scenario-toggle">▼</span>
+                    </button>
+                    <div class="scenario-content hidden" id="scenario4">
+                        <p><strong>This happened in April 2025.</strong></p>
+                        <p>Some Ukrainians received notices stating:</p>
+                        <div class="notice-box">
+                            "Your status has been cancelled. You have 7 days to leave."
+                        </div>
+                        <p>DHS later said: <em>"This was sent in error."</em></p>
+                        <p><strong>What you should do:</strong></p>
+                        <ul>
+                            <li>Do NOT self-deport based on potentially erroneous notice</li>
+                            <li>Contact an immigration attorney immediately</li>
+                            <li>Document everything</li>
+                            <li>But also: You may not be able to afford an attorney</li>
+                            <li>Average immigration attorney cost: $200-500/hour</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Phase 7: Scam Warnings -->
+        <section id="scamSection" class="form-section hidden">
+            <h3>🚨 Scams Targeting Ukrainian Refugees</h3>
+            <p class="section-desc">Because the system is confusing, scammers thrive</p>
+
+            <div class="scam-grid">
+                <div class="scam-card">
+                    <h4>Fake Sponsorship ($500-$800+)</h4>
+                    <p class="scam-example">❌ "Pay me $800 and I'll be your sponsor for re-parole"</p>
+                    <p class="scam-reality">✓ Reality: Sponsorship is FREE through official U4U process</p>
+                    <p class="scam-reality">✓ Reality: U4U re-parole doesn't require new sponsor</p>
+                </div>
+
+                <div class="scam-card">
+                    <h4>Fake Attorneys ("Notarios")</h4>
+                    <p class="scam-example">❌ "I can file your papers for $2,000 - guaranteed approval"</p>
+                    <p class="scam-reality">✓ Reality: No one can guarantee approval</p>
+                    <p class="scam-reality">✓ Reality: "Notario" is not an attorney in the US</p>
+                    <p class="scam-reality">✓ Reality: Bad advice can get you DEPORTED</p>
+                </div>
+
+                <div class="scam-card">
+                    <h4>Phishing Emails</h4>
+                    <p class="scam-example">❌ "USCIS requires additional payment - click here"</p>
+                    <p class="scam-reality">✓ Reality: USCIS will NEVER contact you via social media</p>
+                    <p class="scam-reality">✓ Reality: USCIS will NEVER ask for payment via email link</p>
+                </div>
+
+                <div class="scam-card">
+                    <h4>Social Media Impersonation</h4>
+                    <p class="scam-example">❌ Facebook/Telegram profiles claiming to be "USCIS agents"</p>
+                    <p class="scam-reality">✓ Reality: USCIS has NO agents on social media</p>
+                    <p class="scam-reality">✓ Reality: These accounts have been referred to DHS OIG</p>
+                </div>
+            </div>
+
+            <div class="protection-box">
+                <h4>🛡️ PROTECT YOURSELF:</h4>
+                <ul>
+                    <li>Official USCIS website: <strong>uscis.gov</strong> (not .com, .org, etc.)</li>
+                    <li>Free legal help: <a href="https://ukrainetaskforce.org" target="_blank">ukrainetaskforce.org</a></li>
+                    <li>Free legal help: <a href="https://cliniclegal.org" target="_blank">cliniclegal.org</a></li>
+                    <li>Report scams: 1-800-CALL-FBI or <a href="https://ic3.gov" target="_blank">ic3.gov</a></li>
+                </ul>
+                <p class="protection-note">USCIS will NEVER: contact you on social media, ask for payment via gift cards, guarantee approval for money, or threaten immediate arrest for unpaid fees.</p>
+            </div>
+        </section>
+
+        <!-- Phase 8: Summary Dashboard -->
+        <section id="summarySection" class="form-section hidden">
+            <h3>📊 Your Situation Summary</h3>
+
+            <div class="summary-dashboard" id="summaryDashboard">
+                <!-- Dynamically populated -->
+            </div>
+
+            <div class="system-summary">
+                <div class="system-message">
+                    <p>You escaped a war.</p>
+                    <p>You followed every rule.</p>
+                    <p>You applied through the legal process.</p>
+                    <p>You've lived here, worked here, contributed here.</p>
+                    <br>
+                    <p><strong>And now:</strong></p>
+                    <ul>
+                        <li>You cannot renew your status (applications paused)</li>
+                        <li>Even if you could, you can't afford it ($9,300)</li>
+                        <li>Even if you could afford it, it takes too long (18 months)</li>
+                        <li>Even if it were fast, you'd still have a gap</li>
+                        <li>During the gap, you can't work to pay for the next renewal</li>
+                    </ul>
+                    <p class="system-conclusion"><strong>This is not a bug. This is the system.</strong></p>
+                </div>
+            </div>
+
+            <div class="action-box">
+                <h4>📣 WHAT YOU CAN DO:</h4>
+                <ul>
+                    <li><a href="https://www.house.gov/representatives/find-your-representative" target="_blank">Contact your representatives</a></li>
+                    <li>Support S.696 / H.R. 2118 (Durbin-Fitzpatrick bill)</li>
+                    <li>Share this page</li>
+                    <li>Connect with advocacy organizations:
+                        <ul>
+                            <li><a href="https://ukrainetaskforce.org" target="_blank">Ukraine Immigration Task Force</a></li>
+                            <li><a href="https://www.razomforukraine.org" target="_blank">Razom for Ukraine</a></li>
+                            <li><a href="https://unitedhelpukraine.org" target="_blank">United Help Ukraine</a></li>
+                            <li><a href="https://novaukraine.org" target="_blank">Nova Ukraine</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="share-section">
+                <p>Think this is insane? Share it.</p>
+                <div class="share-buttons">
+                    <button class="share-btn twitter" onclick="shareTwitterUkraine()">Share on X</button>
+                    <button class="share-btn copy" onclick="copyLink()">Copy Link</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Results Modal -->
+        <div id="resultsModal" class="modal hidden">
+            <div class="modal-content">
+                <h2 id="modalTitle">Your Ukrainian Refugee Status</h2>
+                <div class="results-stats">
+                    <div class="result-stat">
+                        <span class="big-number" id="modalFee">$0</span>
+                        <span>Total Cost</span>
+                    </div>
+                    <div class="result-stat">
+                        <span class="big-number" id="modalGap">0</span>
+                        <span>Months in Limbo</span>
+                    </div>
+                    <div class="result-stat">
+                        <span class="big-number" id="modalProcessing">0</span>
+                        <span>Months Processing</span>
+                    </div>
+                </div>
+                <div class="modal-quote">
+                    <p>"The only sin of these people is that they tried to escape a war and believed in the American dream they saw in the movies."</p>
+                </div>
+                <button class="btn-close" onclick="closeModal()">Close</button>
+                <p class="source-note">Sources: USCIS, Federal Register, H.R. 1, Court filings (Svitlana Doe v. Noem)</p>
+            </div>
+        </div>
+
+        <footer>
+            <p>This is a demonstration of actual requirements and structural impossibilities facing Ukrainian refugees in 2025-2026.</p>
+            <p>Data sourced from USCIS, Federal Register notices, H.R. 1, and court documents.</p>
+            <p class="footer-link"><a href="claude_docs/ukrainian_refugee_tab_plan.md" target="_blank">View Full Requirements Documentation</a></p>
+        </footer>
+    </div>
+
+    <script src="ukrainian.js"></script>
+</body>
+</html>
