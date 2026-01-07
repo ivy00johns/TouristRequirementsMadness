@@ -1265,11 +1265,13 @@ function countFieldsInEntry(entry) {
 // Remove dynamically generated entries (emails, phones, family, addresses, etc.)
 // Exposed globally for onclick handlers
 window.removeDynamicEntry = function(button) {
-    const entry = button.closest('[class$="-entry"]');
+    // Find the entry by looking for common entry class patterns
+    const entry = button.closest('.email-entry, .phone-entry, .family-entry, .address-entry, .education-entry, .employment-entry, .travel-entry, .us-travel-entry, .contact-entry, .itinerary-entry, .organization-entry, .alias-entry, .citizenship-entry, .marriage-entry, .lost-passport-entry');
     if (!entry) return;
 
     const container = entry.parentElement;
-    const allEntries = container.querySelectorAll('[class$="-entry"]');
+    const entryClass = entry.className;
+    const allEntries = container.querySelectorAll('.' + entryClass);
 
     // Don't remove if it's the last entry
     if (allEntries.length <= 1) return;
@@ -1280,9 +1282,9 @@ window.removeDynamicEntry = function(button) {
     entry.remove();
 
     // Renumber remaining entries
-    const remainingEntries = container.querySelectorAll('[class$="-entry"]');
-    remainingEntries.forEach((entry, index) => {
-        const h4Span = entry.querySelector('h4 > span:first-child') || entry.querySelector('h4');
+    const remainingEntries = container.querySelectorAll('.' + entryClass);
+    remainingEntries.forEach((ent, index) => {
+        const h4Span = ent.querySelector('h4 > span:first-child') || ent.querySelector('h4');
         if (h4Span) {
             h4Span.innerHTML = h4Span.innerHTML.replace(/\d+/, index + 1);
         }
