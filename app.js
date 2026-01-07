@@ -952,7 +952,10 @@ function generateForm(skipScroll = false) {
     initializeRepeaters();
 
     if (!skipScroll) {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        // Scroll phase2 into view after DOM updates
+        setTimeout(() => {
+            document.getElementById('phase2').scrollIntoView({ behavior: 'instant', block: 'start' });
+        }, 50);
     }
 }
 
@@ -1090,13 +1093,11 @@ function autoFillDemo() {
         socialMediaCount: randomInRange(6, 12)   // Various platforms over 5 years
     };
 
-    // Set all values and highlight them
+    // Set all values
     Object.entries(realisticValues).forEach(([id, value]) => {
         const input = document.getElementById(id);
         if (input) {
             input.value = value;
-            // Add highlight effect
-            input.classList.add('auto-filled');
             // Trigger input event for real-time counter
             input.dispatchEvent(new Event('input', { bubbles: true }));
         }
@@ -1105,11 +1106,8 @@ function autoFillDemo() {
     // Update the real-time counter
     updateRealTimeFieldCount();
 
-    // Scroll to show the filled values so user can adjust
-    const formQuestions = document.getElementById('formQuestions');
-    if (formQuestions) {
-        formQuestions.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+    // Generate the form immediately (scroll handled by generateForm)
+    generateForm();
 }
 
 // Helper for random range
