@@ -1,5 +1,8 @@
 // Configuration constants for the visa application form
 
+// Entry class selector for repeater items
+export const ENTRY_CLASSES = '.email-entry, .phone-entry, .family-entry, .address-entry, .education-entry, .employment-entry, .travel-entry, .us-travel-entry, .contact-entry, .itinerary-entry, .organization-entry, .alias-entry, .citizenship-entry, .marriage-entry, .lost-passport-entry';
+
 // Social media platforms required by DS-160
 export const socialPlatforms = [
     'Facebook', 'Instagram', 'Twitter/X', 'LinkedIn', 'YouTube',

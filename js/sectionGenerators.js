@@ -31,36 +31,66 @@ export function generateSocialMediaFields(count) {
 
     // Always show all 20 platforms as required
     socialPlatforms.forEach(platform => {
-        const div = document.createElement('div');
-        div.className = 'platform-item';
-        div.innerHTML = `
-            <span class="platform-name">${platform}</span>
-            <input type="text" disabled placeholder="Username (Required)">
-            <input type="text" disabled placeholder="Profile URL (Required)">
-            <select disabled>
-                <option>Account Status</option>
-                <option>Active</option>
-                <option>Inactive</option>
-                <option>Deleted</option>
-            </select>
+        const platformDiv = document.createElement('div');
+        platformDiv.className = 'platform-section';
+        platformDiv.innerHTML = `
+            <div class="platform-header">
+                <span class="platform-name">${platform}</span>
+                <button type="button" class="btn-add-account" disabled>+ Add Another ${platform} Account</button>
+            </div>
+            <div class="platform-accounts">
+                <div class="platform-item">
+                    <span class="account-label">Account 1</span>
+                    <input type="text" disabled placeholder="Username (Required)">
+                    <input type="text" disabled placeholder="Profile URL (Required)">
+                    <select disabled>
+                        <option>Account Status</option>
+                        <option>Active</option>
+                        <option>Inactive</option>
+                        <option>Deleted</option>
+                    </select>
+                    <input type="text" disabled placeholder="Date Created (MM/YYYY)">
+                    <select disabled>
+                        <option>Account Visibility</option>
+                        <option>Public</option>
+                        <option>Private</option>
+                        <option>Friends Only</option>
+                    </select>
+                </div>
+            </div>
         `;
-        container.appendChild(div);
-        addToFieldCount(3);
+        container.appendChild(platformDiv);
+        addToFieldCount(5); // 5 fields per account (username, URL, status, date created, visibility)
     });
 
-    // Add extra accounts if user has more
+    // Additional platforms beyond the 20 required
     if (count > socialPlatforms.length) {
         for (let i = 0; i < count - socialPlatforms.length; i++) {
             const div = document.createElement('div');
-            div.className = 'platform-item additional';
+            div.className = 'platform-section additional';
             div.innerHTML = `
-                <span class="platform-name">Additional Account ${i + 1}</span>
-                <input type="text" disabled placeholder="Platform Name">
-                <input type="text" disabled placeholder="Username">
-                <input type="text" disabled placeholder="Profile URL">
+                <div class="platform-header">
+                    <span class="platform-name">Additional Platform ${i + 1}</span>
+                    <button type="button" class="btn-add-account" disabled>+ Add Another Account</button>
+                </div>
+                <div class="platform-accounts">
+                    <div class="platform-item">
+                        <span class="account-label">Account 1</span>
+                        <input type="text" disabled placeholder="Platform Name (Required)">
+                        <input type="text" disabled placeholder="Username (Required)">
+                        <input type="text" disabled placeholder="Profile URL (Required)">
+                        <select disabled>
+                            <option>Account Status</option>
+                            <option>Active</option>
+                            <option>Inactive</option>
+                            <option>Deleted</option>
+                        </select>
+                        <input type="text" disabled placeholder="Date Created (MM/YYYY)">
+                    </div>
+                </div>
             `;
             container.appendChild(div);
-            addToFieldCount(3);
+            addToFieldCount(5);
         }
     }
 }
@@ -80,7 +110,7 @@ export function generateEmailFields(count) {
             className: 'email-entry',
             title: `Email Address ${i + 1}`,
             content,
-            removable: false
+            removable: i > 0
         });
         container.insertAdjacentHTML('beforeend', entry);
         addToFieldCount(def.fieldsPerEntry);
@@ -102,7 +132,7 @@ export function generatePhoneFields(count) {
             className: 'phone-entry',
             title: `Phone Number ${i + 1}`,
             content,
-            removable: false
+            removable: i > 0
         });
         container.insertAdjacentHTML('beforeend', entry);
         addToFieldCount(def.fieldsPerEntry);
@@ -160,7 +190,7 @@ export function generateFamilyFields(count) {
             className: 'family-entry',
             title: rel,
             content: fieldsHtml,
-            removable: false
+            removable: i > 0
         });
         container.insertAdjacentHTML('beforeend', entry);
         addToFieldCount(fieldCount);
@@ -183,7 +213,7 @@ export function generateAddressFields(count) {
             title: `Address ${i + 1}`,
             subtitle: i === 0 ? '(Current)' : '',
             content,
-            removable: false
+            removable: i > 0
         });
         container.insertAdjacentHTML('beforeend', entry);
         addToFieldCount(def.fieldsPerEntry);
@@ -206,7 +236,7 @@ export function generateEducationFields(count) {
             title: `Educational Institution ${i + 1}`,
             subtitle: i === 0 ? '(Most Recent)' : '',
             content,
-            removable: false
+            removable: i > 0
         });
         container.insertAdjacentHTML('beforeend', entry);
         addToFieldCount(def.fieldsPerEntry);
@@ -229,7 +259,7 @@ export function generateEmploymentFields(count) {
             title: `Position ${i + 1}`,
             subtitle: i === 0 ? '(Current/Most Recent)' : '',
             content,
-            removable: false
+            removable: i > 0
         });
         container.insertAdjacentHTML('beforeend', entry);
         addToFieldCount(def.fieldsPerEntry);
@@ -251,7 +281,7 @@ export function generateTravelFields(count) {
             className: 'travel-entry',
             title: `Trip ${i + 1}`,
             content,
-            removable: false
+            removable: i > 0
         });
         container.insertAdjacentHTML('beforeend', entry);
         addToFieldCount(def.fieldsPerEntry);
@@ -279,7 +309,7 @@ export function generateUSTravelFields(count) {
             className: 'us-travel-entry',
             title: `U.S. Visit ${i + 1}`,
             content,
-            removable: false
+            removable: i > 0
         });
         container.insertAdjacentHTML('beforeend', entry);
         addToFieldCount(def.fieldsPerEntry);
@@ -311,7 +341,7 @@ export function generateUSContactsFields(contactCount, destinationCount) {
                 className: 'contact-entry',
                 title: `U.S. Contact ${i + 1}`,
                 content,
-                removable: false
+                removable: i > 0
             });
             addToFieldCount(def.contactFieldsPerEntry);
         }
@@ -327,7 +357,7 @@ export function generateUSContactsFields(contactCount, destinationCount) {
             className: 'itinerary-entry',
             title: `Destination ${i + 1}`,
             content,
-            removable: false
+            removable: i > 0
         });
         addToFieldCount(def.itineraryFieldsPerEntry);
     }
@@ -380,7 +410,7 @@ export function generateOrganizationFields(count) {
             className: 'organization-entry',
             title: `Organization ${i + 1}`,
             content,
-            removable: false
+            removable: i > 0
         });
         container.insertAdjacentHTML('beforeend', entry);
         addToFieldCount(def.fieldsPerEntry);

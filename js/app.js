@@ -20,6 +20,8 @@ import {
     generateFinancialFields,
     generateOrganizationFields
 } from './sectionGenerators.js';
+import { initializeRepeaters, setUpdateStatsCallback, exposeGlobals } from './repeaterManager.js';
+import { autoFillDemo } from './demoFunctions.js';
 
 // Application state
 let selectedCountry = '';
@@ -153,9 +155,9 @@ window.showFormAnyway = function() {
 function calculateEstimatedFields() {
     const getValue = (id) => parseInt(document.getElementById(id)?.value) || 0;
 
-    let estimate = 11; // Base personal info fields
+    let estimate = 50; // Base personal info fields (expanded)
     estimate += 7; // Biometrics
-    estimate += Math.max(getValue('socialMediaCount'), socialPlatforms.length) * 3; // Social media
+    estimate += Math.max(getValue('socialMediaCount'), socialPlatforms.length) * 5; // 5 fields per account
     estimate += getValue('emailCount') * 5;
     estimate += getValue('phoneCount') * 5;
 
@@ -218,7 +220,7 @@ function updateRealTimeFieldCount() {
 /**
  * Generate the complete form
  */
-function generateForm() {
+function generateForm(skipScroll = false) {
     const getValue = (id) => parseInt(document.getElementById(id)?.value) || 0;
 
     // Validate inputs
@@ -235,7 +237,7 @@ function generateForm() {
 
     // Reset field count
     resetFieldCount();
-    addToFieldCount(11); // Base personal info fields
+    addToFieldCount(50); // Base personal info fields (expanded)
 
     // Generate all sections
     generateSocialMediaFields(getValue('socialMediaCount'));
@@ -261,8 +263,15 @@ function generateForm() {
     document.getElementById('phase1').classList.add('hidden');
     document.getElementById('phase2').classList.remove('hidden');
 
-    // Smooth scroll to top
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Initialize repeater buttons after form is generated
+    initializeRepeaters();
+
+    if (!skipScroll) {
+        // Scroll phase2 into view after DOM updates
+        setTimeout(() => {
+            document.getElementById('phase2').scrollIntoView({ behavior: 'instant', block: 'start' });
+        }, 50);
+    }
 }
 
 /**
@@ -399,6 +408,13 @@ function copyLink() {
     });
 }
 
+/**
+ * Handle auto-fill demo button click
+ */
+function handleAutoFillDemo() {
+    autoFillDemo(selectCountry, updateRealTimeFieldCount, generateForm);
+}
+
 // Make functions globally accessible
 window.closeModal = closeModal;
 window.shareTwitter = shareTwitter;
@@ -408,6 +424,12 @@ window.copyLink = copyLink;
  * Initialize the application
  */
 function init() {
+    // Expose global functions for onclick handlers
+    exposeGlobals();
+
+    // Set up the callback for repeater manager to update stats
+    setUpdateStatsCallback(updateStats);
+
     // Build country grids
     buildCountryGrid('fullBanGrid', countryData.fullBan, 'full-ban');
     buildCountryGrid('partialBanGrid', countryData.partialBan, 'partial-ban');
@@ -434,17 +456,20 @@ function init() {
     });
 
     // Form generation button
-    document.getElementById('generateForm')?.addEventListener('click', generateForm);
+    document.getElementById('generateForm')?.addEventListener('click', () => generateForm());
 
     // Submit button
     document.getElementById('submitForm')?.addEventListener('click', showResults);
 
+    // Auto-fill demo button
+    document.getElementById('autoFillDemo')?.addEventListener('click', handleAutoFillDemo);
+
     // Real-time field count updates
-    phase1Questions.forEach(q => {
-        const input = document.getElementById(q.id);
-        if (input) {
-            input.addEventListener('input', updateRealTimeFieldCount);
-        }
+    const inputIds = ['familyMembers', 'emailCount', 'phoneCount', 'addressCount', 'educationCount',
+                      'jobCount', 'travelCount', 'usTravelCount', 'usContactCount', 'usDestinationCount',
+                      'organizationCount', 'socialMediaCount'];
+    inputIds.forEach(id => {
+        document.getElementById(id)?.addEventListener('input', updateRealTimeFieldCount);
     });
 
     // Close modal on escape key

@@ -141,15 +141,17 @@ export function createEntryContainer(config) {
     } = config;
 
     const removeBtn = removable
-        ? '<button type="button" class="btn-remove-entry" title="Remove this entry">&times;</button>'
+        ? '<button type="button" class="btn-remove-entry" onclick="removeDynamicEntry(this)">&times;</button>'
         : '';
+
+    const headerStyle = removable ? 'style="display:flex;justify-content:space-between;align-items:center;"' : '';
 
     return `
         <div class="${className}">
-            <div class="entry-header">
-                <h4>${title}${subtitle ? ` <span class="entry-subtitle">${subtitle}</span>` : ''}</h4>
+            <h4 ${headerStyle}>
+                <span>${title}${subtitle ? ` <span class="entry-subtitle">${subtitle}</span>` : ''}</span>
                 ${removeBtn}
-            </div>
+            </h4>
             <div class="field-row">
                 ${content}
             </div>
