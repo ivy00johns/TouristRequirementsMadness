@@ -1,0 +1,12 @@
+{
+  "name": "tourist-requirements-madness",
+  "version": "1.0.0",
+  "description": "Satirical demonstration of 2025-2026 US tourist visa requirements",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": ["visa", "immigration", "satire"],
+  "license": "MIT"
+}
