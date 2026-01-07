@@ -1,3 +1,6 @@
+// Entry class selector for repeater items (attribute selector [class$="-entry"] doesn't work reliably)
+const ENTRY_CLASSES = '.email-entry, .phone-entry, .family-entry, .address-entry, .education-entry, .employment-entry, .travel-entry, .us-travel-entry, .contact-entry, .itinerary-entry, .organization-entry, .alias-entry, .citizenship-entry, .marriage-entry, .lost-passport-entry';
+
 // Social media platforms required by DS-160
 const socialPlatforms = [
     'Facebook', 'Instagram', 'Twitter/X', 'LinkedIn', 'YouTube',
@@ -1130,12 +1133,12 @@ function handleAddEntry(e) {
     const entryCount = repeaterSection.querySelector('.entry-count');
 
     // Get the first entry as a template
-    const firstEntry = repeaterItems.querySelector('[class$="-entry"]');
+    const firstEntry = repeaterItems.querySelector(ENTRY_CLASSES);
     if (!firstEntry) return;
 
     // Clone and update the entry
     const newEntry = firstEntry.cloneNode(true);
-    const currentCount = repeaterItems.querySelectorAll('[class$="-entry"]').length + 1;
+    const currentCount = repeaterItems.querySelectorAll(ENTRY_CLASSES).length + 1;
 
     // Update the entry number in the h4
     const h4 = newEntry.querySelector('h4');
@@ -1227,12 +1230,12 @@ function handleAddAccount(e) {
 }
 
 function removeEntry(button, repeaterSection) {
-    const entry = button.closest('[class$="-entry"]');
+    const entry = button.closest(ENTRY_CLASSES);
     const repeaterItems = repeaterSection.querySelector('.repeater-items');
     const entryCount = repeaterSection.querySelector('.entry-count');
 
     // Don't remove if it's the last entry
-    const allEntries = repeaterItems.querySelectorAll('[class$="-entry"]');
+    const allEntries = repeaterItems.querySelectorAll(ENTRY_CLASSES);
     if (allEntries.length <= 1) return;
 
     // Update field count before removing
@@ -1241,7 +1244,7 @@ function removeEntry(button, repeaterSection) {
     entry.remove();
 
     // Renumber remaining entries
-    const remainingEntries = repeaterItems.querySelectorAll('[class$="-entry"]');
+    const remainingEntries = repeaterItems.querySelectorAll(ENTRY_CLASSES);
     remainingEntries.forEach((entry, index) => {
         const h4 = entry.querySelector('h4 span') || entry.querySelector('h4');
         if (h4) {
@@ -1266,7 +1269,7 @@ function countFieldsInEntry(entry) {
 // Exposed globally for onclick handlers
 window.removeDynamicEntry = function(button) {
     // Find the entry by looking for common entry class patterns
-    const entry = button.closest('.email-entry, .phone-entry, .family-entry, .address-entry, .education-entry, .employment-entry, .travel-entry, .us-travel-entry, .contact-entry, .itinerary-entry, .organization-entry, .alias-entry, .citizenship-entry, .marriage-entry, .lost-passport-entry');
+    const entry = button.closest(ENTRY_CLASSES);
     if (!entry) return;
 
     const container = entry.parentElement;
