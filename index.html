@@ -35,42 +35,70 @@
             <h3>Section A: Application Scope Assessment</h3>
             <p class="section-desc">Please provide the following information to generate your personalized application form.</p>
 
-            <div class="question-group">
-                <label>How many immediate family members do you have? (parents, siblings, spouse, children)</label>
-                <input type="number" id="familyMembers" min="0" max="50" value="4" class="number-input">
+            <div class="question-group country-select">
+                <label>What country are you traveling from?</label>
+                <div class="country-search">
+                    <input type="text" id="countrySearch" placeholder="Search for your country..." class="country-search-input">
+                </div>
+                <div class="country-grid-container">
+                    <div class="country-category">
+                        <h4 class="category-header full-ban">🚫 Full Travel Ban - All Visas Suspended (20)</h4>
+                        <div class="country-grid" id="fullBanGrid"></div>
+                    </div>
+                    <div class="country-category">
+                        <h4 class="category-header partial-ban">⚠️ Partial Ban - Tourist Visas Suspended (19)</h4>
+                        <div class="country-grid" id="partialBanGrid"></div>
+                    </div>
+                    <div class="country-category">
+                        <h4 class="category-header vwp">📋 Visa Waiver - Enhanced ESTA Proposed (41)</h4>
+                        <div class="country-grid" id="vwpGrid"></div>
+                    </div>
+                    <div class="country-category">
+                        <h4 class="category-header standard">📝 Standard Enhanced Vetting (100+)</h4>
+                        <div class="country-grid" id="standardGrid"></div>
+                    </div>
+                </div>
+                <div id="countryWarning" class="country-warning hidden"></div>
             </div>
 
-            <div class="question-group">
-                <label>How many email addresses have you used in the past 10 years? (personal & business)</label>
-                <input type="number" id="emailCount" min="1" max="100" value="5" class="number-input">
-            </div>
+            <div id="formQuestions" class="hidden">
+                <div class="question-group">
+                    <label>How many immediate family members do you have? (parents, siblings, spouse, children)</label>
+                    <input type="number" id="familyMembers" min="0" max="50" placeholder="Enter number" class="number-input">
+                </div>
 
-            <div class="question-group">
-                <label>How many phone numbers have you used in the past 5 years? (personal, business, family)</label>
-                <input type="number" id="phoneCount" min="1" max="50" value="3" class="number-input">
-            </div>
+                <div class="question-group">
+                    <label>How many email addresses have you used in the past 10 years? (personal & business)</label>
+                    <input type="number" id="emailCount" min="1" max="100" placeholder="Enter number" class="number-input">
+                </div>
 
-            <div class="question-group">
-                <label>How many addresses have you lived at in the past 15 years?</label>
-                <input type="number" id="addressCount" min="1" max="50" value="6" class="number-input">
-            </div>
+                <div class="question-group">
+                    <label>How many phone numbers have you used in the past 5 years? (personal, business, family)</label>
+                    <input type="number" id="phoneCount" min="1" max="50" placeholder="Enter number" class="number-input">
+                </div>
 
-            <div class="question-group">
-                <label>How many jobs have you held in the past 15 years?</label>
-                <input type="number" id="jobCount" min="0" max="100" value="8" class="number-input">
-            </div>
+                <div class="question-group">
+                    <label>How many addresses have you lived at in the past 15 years?</label>
+                    <input type="number" id="addressCount" min="1" max="50" placeholder="Enter number" class="number-input">
+                </div>
 
-            <div class="question-group">
-                <label>How many countries have you traveled to in the past 15 years?</label>
-                <input type="number" id="travelCount" min="0" max="200" value="12" class="number-input">
-            </div>
+                <div class="question-group">
+                    <label>How many jobs have you held in the past 15 years?</label>
+                    <input type="number" id="jobCount" min="0" max="100" placeholder="Enter number" class="number-input">
+                </div>
 
-            <div class="question-group">
-                <label>How many social media accounts do you have or have had in the past 5 years?</label>
-                <input type="number" id="socialMediaCount" min="0" max="50" value="8" class="number-input">
-            </div>
+                <div class="question-group">
+                    <label>How many countries have you traveled to in the past 15 years?</label>
+                    <input type="number" id="travelCount" min="0" max="200" placeholder="Enter number" class="number-input">
+                </div>
 
-            <button id="generateForm" class="btn-primary">Generate My Application Form</button>
+                <div class="question-group">
+                    <label>How many social media accounts do you have or have had in the past 5 years?</label>
+                    <input type="number" id="socialMediaCount" min="0" max="50" placeholder="Enter number" class="number-input">
+                </div>
+
+                <button id="generateForm" class="btn-primary">Generate My Application Form</button>
+            </div>
         </section>
 
         <!-- Phase 2: The Monster Form -->

@@ -207,6 +207,318 @@ body {
     font-style: italic;
 }
 
+/* Country Selection */
+.country-select {
+    margin-bottom: 25px;
+}
+
+.country-dropdown {
+    width: 100%;
+    max-width: 500px;
+    padding: 12px 15px;
+    font-size: 1rem;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background: white;
+    cursor: pointer;
+}
+
+.country-dropdown:focus {
+    outline: none;
+    border-color: #2c5282;
+}
+
+.country-dropdown optgroup {
+    font-weight: 700;
+    color: #333;
+    padding: 10px 0;
+}
+
+.country-dropdown option {
+    padding: 8px;
+    font-weight: 400;
+}
+
+/* Country Search Input */
+.country-search {
+    margin-bottom: 20px;
+}
+
+.country-search-input {
+    width: 100%;
+    max-width: 400px;
+    padding: 12px 15px;
+    font-size: 1rem;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background: white;
+}
+
+.country-search-input:focus {
+    outline: none;
+    border-color: #2c5282;
+}
+
+/* Country Grid Container */
+.country-grid-container {
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    background: #fafafa;
+    padding: 15px;
+}
+
+.country-category {
+    margin-bottom: 20px;
+}
+
+.country-category:last-child {
+    margin-bottom: 0;
+}
+
+.category-header {
+    padding: 10px 15px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.category-header.full-ban {
+    background: #fff5f5;
+    color: #c53030;
+    border-left: 4px solid #c53030;
+}
+
+.category-header.partial-ban {
+    background: #fffaf0;
+    color: #dd6b20;
+    border-left: 4px solid #dd6b20;
+}
+
+.category-header.vwp {
+    background: #fffff0;
+    color: #975a16;
+    border-left: 4px solid #d69e2e;
+}
+
+.category-header.standard {
+    background: #f0fff4;
+    color: #276749;
+    border-left: 4px solid #38a169;
+}
+
+/* Country Grid */
+.country-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.country-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    border: 2px solid #e2e8f0;
+    border-radius: 6px;
+    background: white;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.15s ease;
+}
+
+.country-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.country-btn .flag {
+    font-size: 1.2rem;
+}
+
+.country-btn .country-name {
+    font-weight: 500;
+    color: #333;
+}
+
+/* Country button status colors */
+.country-btn.full-ban {
+    border-color: #feb2b2;
+    background: #fff5f5;
+}
+
+.country-btn.full-ban:hover {
+    border-color: #c53030;
+    background: #fed7d7;
+}
+
+.country-btn.partial-ban {
+    border-color: #fbd38d;
+    background: #fffaf0;
+}
+
+.country-btn.partial-ban:hover {
+    border-color: #dd6b20;
+    background: #feebc8;
+}
+
+.country-btn.vwp {
+    border-color: #faf089;
+    background: #fffff0;
+}
+
+.country-btn.vwp:hover {
+    border-color: #d69e2e;
+    background: #fefcbf;
+}
+
+.country-btn.standard {
+    border-color: #9ae6b4;
+    background: #f0fff4;
+}
+
+.country-btn.standard:hover {
+    border-color: #38a169;
+    background: #c6f6d5;
+}
+
+/* Selected state */
+.country-btn.selected {
+    box-shadow: 0 0 0 3px rgba(44, 82, 130, 0.4);
+    transform: translateY(-1px);
+}
+
+.country-btn.full-ban.selected {
+    border-color: #c53030;
+    box-shadow: 0 0 0 3px rgba(197, 48, 48, 0.3);
+}
+
+.country-btn.partial-ban.selected {
+    border-color: #dd6b20;
+    box-shadow: 0 0 0 3px rgba(221, 107, 32, 0.3);
+}
+
+.country-btn.vwp.selected {
+    border-color: #d69e2e;
+    box-shadow: 0 0 0 3px rgba(214, 158, 46, 0.3);
+}
+
+.country-btn.standard.selected {
+    border-color: #38a169;
+    box-shadow: 0 0 0 3px rgba(56, 161, 105, 0.3);
+}
+
+/* Country Warning Boxes */
+.country-warning {
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 5px solid;
+}
+
+.country-warning h4 {
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+.country-warning p {
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
+.country-warning ul {
+    margin: 15px 0;
+    padding-left: 25px;
+}
+
+.country-warning li {
+    margin-bottom: 8px;
+}
+
+.country-warning.full-ban {
+    background: #fff5f5;
+    border-color: #c53030;
+}
+
+.country-warning.full-ban h4 {
+    color: #c53030;
+}
+
+.country-warning.partial-ban {
+    background: #fffaf0;
+    border-color: #dd6b20;
+}
+
+.country-warning.partial-ban h4 {
+    color: #dd6b20;
+}
+
+.country-warning.vwp {
+    background: #fffff0;
+    border-color: #d69e2e;
+}
+
+.country-warning.vwp h4 {
+    color: #975a16;
+}
+
+.country-warning.standard {
+    background: #f0fff4;
+    border-color: #38a169;
+}
+
+.country-warning.standard h4 {
+    color: #276749;
+}
+
+.ban-source {
+    font-size: 0.85rem;
+    color: #718096;
+    font-style: italic;
+    margin-top: 15px !important;
+}
+
+.ban-demo-note {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px dashed #ccc;
+}
+
+.ban-demo-note p {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.btn-secondary {
+    background: #4a5568;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-top: 10px;
+    transition: background 0.2s;
+}
+
+.btn-secondary:hover {
+    background: #2d3748;
+}
+
+.demo-active {
+    background: #e2e8f0;
+    padding: 10px;
+    border-radius: 4px;
+    font-weight: 500;
+    color: #4a5568;
+}
+
+#formQuestions {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 2px solid #e2e8f0;
+}
+
 /* Form Sections */
 .form-section {
     background: white;
@@ -654,6 +966,41 @@ body {
 .status-tag.likely {
     background: #e9d8fd;
     color: #553c9a;
+}
+
+.status-tag.banned {
+    background: #c53030;
+    color: white;
+}
+
+/* Ban highlight in comparison list */
+.comparison li.ban-highlight {
+    background: #fff5f5;
+    border-left-color: #c53030;
+    border-left-width: 6px;
+    font-weight: 500;
+}
+
+.comparison li.ban-highlight.partial {
+    background: #fffaf0;
+    border-left-color: #dd6b20;
+}
+
+/* Modal ban tags */
+.modal-ban-tag {
+    display: inline-block;
+    background: #c53030;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.modal-ban-tag.partial {
+    background: #dd6b20;
 }
 
 /* Absurdity Scale */
