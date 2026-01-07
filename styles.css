@@ -67,6 +67,21 @@ body {
     color: #d63384;
 }
 
+/* Demo Notice */
+.demo-notice {
+    background-color: #e6f3ff;
+    border: 2px solid #2c5282;
+    border-left: 4px solid #2c5282;
+    padding: 10px 14px;
+    margin-bottom: 10px;
+    font-size: 0.85rem;
+    color: #1a365d;
+}
+
+.demo-notice strong {
+    color: #2c5282;
+}
+
 /* Status Legend */
 .status-legend {
     background: white;
