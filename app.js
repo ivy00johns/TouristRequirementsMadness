@@ -1215,7 +1215,7 @@ function handleAddAccount(e) {
         removeBtn.type = 'button';
         removeBtn.className = 'btn-remove-account';
         removeBtn.textContent = '×';
-        removeBtn.onclick = function() { removeSocialAccount(this); };
+        removeBtn.onclick = function() { window.removeSocialAccount(this); };
         newAccount.appendChild(removeBtn);
     }
 
@@ -1263,7 +1263,8 @@ function countFieldsInEntry(entry) {
 }
 
 // Remove dynamically generated entries (emails, phones, family, addresses, etc.)
-function removeDynamicEntry(button) {
+// Exposed globally for onclick handlers
+window.removeDynamicEntry = function(button) {
     const entry = button.closest('[class$="-entry"]');
     if (!entry) return;
 
@@ -1291,7 +1292,8 @@ function removeDynamicEntry(button) {
 }
 
 // Remove social media account
-function removeSocialAccount(button) {
+// Exposed globally for onclick handlers
+window.removeSocialAccount = function(button) {
     const account = button.closest('.platform-item');
     if (!account) return;
 
