@@ -5,7 +5,9 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "node server.js"
+    "dev": "node server.js",
+    "stop": "pkill -f 'node server.js' || true",
+    "restart": "npm run stop && npm run start"
   },
   "keywords": ["visa", "immigration", "satire"],
   "license": "MIT"
