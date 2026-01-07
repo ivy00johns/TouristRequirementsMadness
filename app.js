@@ -905,7 +905,7 @@ function generateOrganizationFields(count) {
     }
 }
 
-function generateForm() {
+function generateForm(skipScroll = false) {
     const getValue = (id) => parseInt(document.getElementById(id)?.value) || 0;
 
     const requiredFields = ['familyMembers', 'emailCount', 'phoneCount', 'addressCount',
@@ -940,7 +940,10 @@ function generateForm() {
 
     document.getElementById('phase1').classList.add('hidden');
     document.getElementById('phase2').classList.remove('hidden');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    if (!skipScroll) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 }
 
 function updateStats() {
@@ -1058,49 +1061,40 @@ function autoFillDemo() {
     const standardCountries = countryData.standard;
     const randomCountry = standardCountries[Math.floor(Math.random() * standardCountries.length)];
 
-    // Select the country
+    // Select the country (without scrolling)
     selectCountry(randomCountry.name, 'standard');
 
-    // Scroll to show country selection briefly
-    document.querySelector('.country-grid-container').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Realistic ranges based on a typical adult traveler
+    const realisticValues = {
+        familyMembers: randomInRange(4, 8),      // Parents, siblings, maybe spouse/kids
+        emailCount: randomInRange(5, 12),        // Personal, work, old accounts
+        phoneCount: randomInRange(3, 6),         // Personal, work, maybe old numbers
+        addressCount: randomInRange(4, 10),      // Moved a few times over 15 years
+        educationCount: randomInRange(2, 4),     // High school, college, maybe grad school
+        jobCount: randomInRange(4, 10),          // Average job tenure ~2-3 years
+        travelCount: randomInRange(8, 20),       // Moderate traveler
+        usTravelCount: randomInRange(0, 5),      // Some previous US visits
+        usContactCount: randomInRange(1, 4),     // A few contacts
+        usDestinationCount: randomInRange(2, 5), // NYC, LA, maybe Vegas
+        organizationCount: randomInRange(3, 8),  // Gym, clubs, professional orgs
+        socialMediaCount: randomInRange(6, 12)   // Various platforms over 5 years
+    };
 
-    // Fill in realistic random values after a short delay
-    setTimeout(() => {
-        // Realistic ranges based on a typical adult traveler
-        const realisticValues = {
-            familyMembers: randomInRange(4, 8),      // Parents, siblings, maybe spouse/kids
-            emailCount: randomInRange(5, 12),        // Personal, work, old accounts
-            phoneCount: randomInRange(3, 6),         // Personal, work, maybe old numbers
-            addressCount: randomInRange(4, 10),      // Moved a few times over 15 years
-            educationCount: randomInRange(2, 4),     // High school, college, maybe grad school
-            jobCount: randomInRange(4, 10),          // Average job tenure ~2-3 years
-            travelCount: randomInRange(8, 20),       // Moderate traveler
-            usTravelCount: randomInRange(0, 5),      // Some previous US visits
-            usContactCount: randomInRange(1, 4),     // A few contacts
-            usDestinationCount: randomInRange(2, 5), // NYC, LA, maybe Vegas
-            organizationCount: randomInRange(3, 8),  // Gym, clubs, professional orgs
-            socialMediaCount: randomInRange(6, 12)   // Various platforms over 5 years
-        };
+    // Set all values
+    Object.entries(realisticValues).forEach(([id, value]) => {
+        const input = document.getElementById(id);
+        if (input) {
+            input.value = value;
+            // Trigger input event for real-time counter
+            input.dispatchEvent(new Event('input', { bubbles: true }));
+        }
+    });
 
-        // Set all values
-        Object.entries(realisticValues).forEach(([id, value]) => {
-            const input = document.getElementById(id);
-            if (input) {
-                input.value = value;
-                // Trigger input event for real-time counter
-                input.dispatchEvent(new Event('input', { bubbles: true }));
-            }
-        });
+    // Update the real-time counter
+    updateRealTimeFieldCount();
 
-        // Update the real-time counter
-        updateRealTimeFieldCount();
-
-        // Auto-generate the form after another short delay
-        setTimeout(() => {
-            generateForm();
-        }, 800);
-
-    }, 500);
+    // Generate the form immediately
+    generateForm(true); // Pass flag to skip scroll
 }
 
 // Helper for random range
