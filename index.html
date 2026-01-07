@@ -30,6 +30,14 @@
             </div>
         </div>
 
+        <!-- Auto-fill demo button -->
+        <div class="demo-button-container">
+            <button type="button" id="autoFillDemo" class="btn-demo">
+                Auto-Fill Demo (Show me the madness!)
+            </button>
+            <p class="demo-hint">Click to automatically fill realistic values and see the full form</p>
+        </div>
+
         <!-- Phase 1: Initial Questions -->
         <section id="phase1" class="form-section">
             <h3>Section A: Application Scope Assessment</h3>
@@ -42,19 +50,19 @@
                 </div>
                 <div class="country-grid-container">
                     <div class="country-category">
-                        <h4 class="category-header full-ban">🚫 Full Travel Ban - All Visas Suspended (20)</h4>
+                        <h4 class="category-header full-ban">Full Travel Ban - All Visas Suspended (20)</h4>
                         <div class="country-grid" id="fullBanGrid"></div>
                     </div>
                     <div class="country-category">
-                        <h4 class="category-header partial-ban">⚠️ Partial Ban - Tourist Visas Suspended (19)</h4>
+                        <h4 class="category-header partial-ban">Partial Ban - Tourist Visas Suspended (19)</h4>
                         <div class="country-grid" id="partialBanGrid"></div>
                     </div>
                     <div class="country-category">
-                        <h4 class="category-header vwp">📋 Visa Waiver - Enhanced ESTA Proposed (41)</h4>
+                        <h4 class="category-header vwp">Visa Waiver - Enhanced ESTA Proposed (41)</h4>
                         <div class="country-grid" id="vwpGrid"></div>
                     </div>
                     <div class="country-category">
-                        <h4 class="category-header standard">📝 Standard Enhanced Vetting (100+)</h4>
+                        <h4 class="category-header standard">Standard Enhanced Vetting (100+)</h4>
                         <div class="country-grid" id="standardGrid"></div>
                     </div>
                 </div>
@@ -83,6 +91,11 @@
                 </div>
 
                 <div class="question-group">
+                    <label>How many educational institutions have you attended in the past 15 years?</label>
+                    <input type="number" id="educationCount" min="0" max="20" placeholder="Enter number" class="number-input">
+                </div>
+
+                <div class="question-group">
                     <label>How many jobs have you held in the past 15 years?</label>
                     <input type="number" id="jobCount" min="0" max="100" placeholder="Enter number" class="number-input">
                 </div>
@@ -93,9 +106,32 @@
                 </div>
 
                 <div class="question-group">
+                    <label>How many times have you previously visited the United States?</label>
+                    <input type="number" id="usTravelCount" min="0" max="100" placeholder="Enter number" class="number-input">
+                </div>
+
+                <div class="question-group">
+                    <label>How many U.S. contacts will you visit? (friends, family, business contacts)</label>
+                    <input type="number" id="usContactCount" min="0" max="20" placeholder="Enter number" class="number-input">
+                </div>
+
+                <div class="question-group">
+                    <label>How many U.S. cities/destinations are in your itinerary?</label>
+                    <input type="number" id="usDestinationCount" min="1" max="50" placeholder="Enter number" class="number-input">
+                </div>
+
+                <div class="question-group">
+                    <label>How many organizations, clubs, or groups have you been a member of (past 15 years)?</label>
+                    <input type="number" id="organizationCount" min="0" max="100" placeholder="Enter number" class="number-input">
+                </div>
+
+                <div class="question-group">
                     <label>How many social media accounts do you have or have had in the past 5 years?</label>
                     <input type="number" id="socialMediaCount" min="0" max="50" placeholder="Enter number" class="number-input">
                 </div>
+
+                <!-- Real-time field counter -->
+                <div id="realTimeCounter" class="hidden"></div>
 
                 <button id="generateForm" class="btn-primary">Generate My Application Form</button>
             </div>
@@ -270,9 +306,19 @@
                     </div>
                 </fieldset>
 
+                <!-- Educational History - NEW -->
+                <fieldset class="form-fieldset">
+                    <legend><span class="status-badge current">CURRENT</span> Section I-A: Educational History (Past 15 Years)</legend>
+                    <p class="fieldset-notice">List ALL educational institutions attended in the past 15 years, including high school, university, vocational training, and graduate programs.</p>
+                    <p class="source-cite">Source: DS-5535 requires 15 years of history; DS-160 requires educational background</p>
+                    <div id="educationFields">
+                        <!-- Generated dynamically -->
+                    </div>
+                </fieldset>
+
                 <!-- Employment History -->
                 <fieldset class="form-fieldset">
-                    <legend><span class="status-badge current">CURRENT</span> Section I: Employment History (Past 15 Years)</legend>
+                    <legend><span class="status-badge current">CURRENT</span> Section I-B: Employment History (Past 15 Years)</legend>
                     <p class="fieldset-notice">Include ALL positions: full-time, part-time, freelance, internships, and volunteer work. Requires employer names, addresses, phone numbers, supervisor names, job titles, duties, and monthly income.</p>
                     <p class="source-cite">Source: DS-5535 supplemental form (15 years); DS-160 requires 5 years</p>
                     <div id="employmentFields">
@@ -289,10 +335,51 @@
                     </div>
                 </fieldset>
 
-                <!-- Additional Questions -->
+                <!-- Previous U.S. Travel - NEW -->
                 <fieldset class="form-fieldset">
-                    <legend>Section K: Security Screening Questions</legend>
-                    <p class="source-cite">Source: Consular officers screen for "hostility toward the U.S." and antisemitism per June 2025 guidance. IP metadata collection per proposed ESTA rule.</p>
+                    <legend><span class="status-badge current">CURRENT</span> Section J-B: Previous United States Travel</legend>
+                    <p class="fieldset-notice">Provide details for EACH previous visit to the United States, including dates, ports of entry, visa type used, and contacts visited.</p>
+                    <p class="source-cite">Source: DS-160 asks "Have you ever been in the U.S.?" with dates and details</p>
+                    <div id="usTravelFields">
+                        <!-- Generated dynamically -->
+                    </div>
+                </fieldset>
+
+                <!-- U.S. Contacts and Itinerary - NEW -->
+                <fieldset class="form-fieldset">
+                    <legend><span class="status-badge current">CURRENT</span> Section K-A: U.S. Contacts and Planned Itinerary</legend>
+                    <p class="fieldset-notice">Provide contact information for persons or organizations you will visit in the United States, and your planned itinerary.</p>
+                    <p class="source-cite">Source: DS-160 requires U.S. contact information and trip details</p>
+                    <div id="usContactsFields">
+                        <!-- Generated dynamically -->
+                    </div>
+                </fieldset>
+
+                <!-- Financial Information - NEW -->
+                <fieldset class="form-fieldset">
+                    <legend><span class="status-badge current">CURRENT</span> Section L: Financial Disclosure</legend>
+                    <p class="fieldset-notice">Provide information about your financial status and how you will fund your trip to the United States.</p>
+                    <p class="source-cite">Source: DS-160 requires "Present Monthly Income" and "Describe the source of funds you will use"</p>
+                    <div id="financialFields">
+                        <!-- Generated dynamically -->
+                    </div>
+                </fieldset>
+
+                <!-- Security Screening Questions -->
+                <fieldset class="form-fieldset">
+                    <legend>Section K-B: Security Screening Questions</legend>
+                    <p class="source-cite">Source: DS-5535 requires "all organizations, clubs, or groups"; Consular officers screen for "hostility toward the U.S." per June 2025 guidance; IP metadata per proposed ESTA rule.</p>
+
+                    <!-- Organizations Repeater -->
+                    <div class="repeater-section" id="organizationsRepeater">
+                        <div class="repeater-header">
+                            <h4><span class="status-badge-inline current">CURRENT</span> Organizations, Clubs, or Groups (Past 15 Years) <span class="entry-count">(0 entries)</span></h4>
+                        </div>
+                        <div class="repeater-items" id="organizationsContainer">
+                            <!-- Generated dynamically -->
+                        </div>
+                    </div>
+
                     <div class="security-questions">
                         <div class="field-group full-width">
                             <label><span class="status-badge-inline likely">LIKELY</span> Have you ever expressed views critical of the United States government on social media?</label>
@@ -303,10 +390,6 @@
                             <label><span class="status-badge-inline likely">LIKELY</span> Have you ever attended a protest or political demonstration?</label>
                             <select disabled><option>Select Yes/No</option></select>
                             <p class="field-note">Inferred from organizational membership screening</p>
-                        </div>
-                        <div class="field-group full-width">
-                            <label><span class="status-badge-inline current">CURRENT</span> List all organizations, clubs, or groups you have been a member of (past 15 years):</label>
-                            <textarea disabled placeholder="Required"></textarea>
                         </div>
                         <div class="field-group full-width">
                             <label><span class="status-badge-inline current">CURRENT</span> Have you ever been questioned, detained, or arrested by any authority in any country?</label>
