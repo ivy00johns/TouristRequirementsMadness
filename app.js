@@ -1090,11 +1090,13 @@ function autoFillDemo() {
         socialMediaCount: randomInRange(6, 12)   // Various platforms over 5 years
     };
 
-    // Set all values
+    // Set all values and highlight them
     Object.entries(realisticValues).forEach(([id, value]) => {
         const input = document.getElementById(id);
         if (input) {
             input.value = value;
+            // Add highlight effect
+            input.classList.add('auto-filled');
             // Trigger input event for real-time counter
             input.dispatchEvent(new Event('input', { bubbles: true }));
         }
@@ -1103,8 +1105,11 @@ function autoFillDemo() {
     // Update the real-time counter
     updateRealTimeFieldCount();
 
-    // Generate the form immediately
-    generateForm(true); // Pass flag to skip scroll
+    // Scroll to show the filled values so user can adjust
+    const formQuestions = document.getElementById('formQuestions');
+    if (formQuestions) {
+        formQuestions.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
 }
 
 // Helper for random range

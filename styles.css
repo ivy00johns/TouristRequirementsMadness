@@ -584,6 +584,23 @@ body {
     border-color: #2c5282;
 }
 
+.number-input.auto-filled {
+    background-color: #fffbeb;
+    border-color: #f59e0b;
+    animation: highlight-pulse 1s ease-out;
+}
+
+@keyframes highlight-pulse {
+    0% {
+        background-color: #fef3c7;
+        transform: scale(1.05);
+    }
+    100% {
+        background-color: #fffbeb;
+        transform: scale(1);
+    }
+}
+
 /* Buttons */
 .btn-primary {
     background: linear-gradient(135deg, #2c5282 0%, #1a365d 100%);
